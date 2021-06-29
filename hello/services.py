@@ -38,8 +38,8 @@ def single_service(request):
 	    returns. 
 	"""
 
-	f= open("tmptest.txt","w+")
+	f= open("/home/site/textFiles/tmptest.txt","w+")
 	f.write('This is content!')
 	f.close()
-	
+
 	return JsonResponse({'success': "true"})
