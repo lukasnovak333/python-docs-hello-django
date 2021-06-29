@@ -22,12 +22,8 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 @require_http_methods(["POST"])
 def single_service(request):
-	return JsonResponse({'success': 'true'})
-
 	try:
-		return JsonResponse({'body': request})
-
-		content = request.body
+		content = request['body']
 		cond_and_id = content['conditionAndId']
 		final_result = content['finalResult']
 
