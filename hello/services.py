@@ -40,6 +40,8 @@ def single_service(request):
 	"""
 
 	try:
+		return JsonResponse({'body': request})
+		
 		content = request.body
 		cond_and_id = content['conditionAndId']
 		final_result = content['finalResult']
@@ -52,7 +54,7 @@ def single_service(request):
 		f.write('----------------')
 		f.close()
 		return JsonResponse({'success': "true"})
-		
+
 	except Exception as e:
 		return JsonResponse({'error': 'true', 'message': e})
 
