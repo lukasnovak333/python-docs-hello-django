@@ -16,7 +16,7 @@ from django.http import QueryDict, JsonResponse
 from django.views.decorators.http import require_http_methods
 
 # Our content
-from ..models import *
+# from ..models import *
 
 
 @require_http_methods(["POST"])
