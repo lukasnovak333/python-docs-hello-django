@@ -1,3 +1,6 @@
+import sys
+sys.path.append("..")
+
 from django.urls import path
 
 from . import views, services
