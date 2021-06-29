@@ -3,8 +3,11 @@
 	for the boss application. 
 """
 
+
 # Python Imports
 import json 
+import sys
+sys.path.append("..")
 
 # Basic Django Tools
 from django.http import QueryDict, JsonResponse
