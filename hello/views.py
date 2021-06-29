@@ -18,4 +18,4 @@ def hello(request):
         }
     }
 
-    return render(request, "base.html", context=context)
+    return render(request, "base_with_fish.html", context=context)
