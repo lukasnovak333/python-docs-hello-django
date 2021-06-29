@@ -136,7 +136,7 @@ Final score: 0
 		window.jQuery || document.write('<script src="{% static "jquery-3.6.0.min.js" %}">\x3C/script>');
 	</script>
 
-	
+
 
 	<script type="text/javascript">
 	var output;
@@ -159,6 +159,14 @@ Final score: 0
 	var p2_take = 0;
 	var p3_take = 0;
 	var p4_take = 0;
+	var p1_connect_time = 250;
+	var p3_connect_time  = 400;
+	var game_start_time = 500;
+
+	var bot_turn_rand_time = 1000;
+	var bot_turn_base_time = 2000;
+	var bot_turn_offset_rand = 500;
+	var bot_turn_offset_base = 500;
 
 
 	$(document).keydown(function(event) 
@@ -203,9 +211,9 @@ Final score: 0
 	{
 		$("#instructions").hide();
 		$("#connect").show();
-		setTimeout(function(){ document.getElementById("p1_connect").innerHTML = "Player 1 - Connected"}, 25000);
-		setTimeout(function(){ document.getElementById("p3_connect").innerHTML = "Player 3 - Connected"}, 47000);
-		setTimeout(function(){ $("#game").show(); $("#connect").hide(); }, 52000);
+		setTimeout(function(){ document.getElementById("p1_connect").innerHTML = "Player 1 - Connected"}, p1_connect_time);
+		setTimeout(function(){ document.getElementById("p3_connect").innerHTML = "Player 3 - Connected"}, p3_connect_time);
+		setTimeout(function(){ $("#game").show(); $("#connect").hide(); }, game_start_time);
 	}
 
 	function turn_advance()
@@ -265,8 +273,8 @@ Final score: 0
 
 	function computerTurn()
 	{
-		var center = Math.floor(Math.random() * 4000) + 7000;
-		var offset = Math.floor(Math.random() * 2000) + 3000;
+		var center = Math.floor(Math.random() * bot_turn_rand_time) + bot_turn_base_time;
+		var offset = Math.floor(Math.random() * bot_turn_offset_rand) + bot_turn_offset_base;
 		var turn_time = [center, (center + offset), (center - offset)];
 		shuffle(turn_time);
 		setTimeout(p1_turn, turn_time[0]);
@@ -305,6 +313,7 @@ Final score: 0
 			$("#game").hide();
 			document.getElementById("finish_total").innerHTML = "Final score: " + p4_total;
 			$("#finish").show();
+			alert("The game is over")
 			return;
 		}
 	}
