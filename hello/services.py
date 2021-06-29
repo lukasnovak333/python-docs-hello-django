@@ -14,11 +14,12 @@ from django.http import QueryDict, JsonResponse
 
 # Service Decorators
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import csrf_exempt
 
 # Our content
 # from .models import *
 
-
+@csrf_exempt
 @require_http_methods(["POST"])
 def single_service(request):
 	""" This is a service, defined in urls.py, and 
