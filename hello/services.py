@@ -16,10 +16,10 @@ from django.http import QueryDict, JsonResponse
 from django.views.decorators.http import require_http_methods
 
 # Our content
-# from ..models import *
+# from .models import *
 
 
-@require_http_methods(["POST"])
+#@require_http_methods(["POST"])
 def single_service(request):
 	""" This is a service, defined in urls.py, and 
 	    called via ajax methods (e.g. fetch)
@@ -37,4 +37,9 @@ def single_service(request):
 	    when the fetch call (or whatever ajax call you use)
 	    returns. 
 	"""
+
+	f= open("tmptest.txt","w+")
+	f.write('This is content!')
+	f.close()
+	
 	return JsonResponse({'success': "true"})
