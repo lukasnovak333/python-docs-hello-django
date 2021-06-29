@@ -1,0 +1,40 @@
+{# base.html #}
+{# this is the base template for all pages #}
+
+{% load static %}
+<html>
+<head>
+{% block styles %}
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'common/css/base.css' %}">
+{% endblock styles %}
+</head>
+<body>
+	<div id="header" class="page-section bar-section">
+		<h1 id="header-title"> A Web Application </h1>
+		<h4 id="header-subtitle"> 
+		   Here's a header. </br>
+		   All of this is defined in ./application_name/templates/base.html </br>
+		   Read <a href="https://docs.djangoproject.com/en/2.0/topics/templates/"> Django template docs </a> for more info. </br>
+		</h4>
+	</div>
+
+	<div id="content" class="page-section">
+		{% block content %}
+			This is a template.  Generate real pages based on this template by including the line
+			{% verbatim %} {% extends "base.html" %} {% endverbatim %}
+			at the top of the file.
+		{% endblock content %}
+	</div>
+	<div id="footer" class="page-section bar-section">
+		<h4 id="copyright-holder">
+			Here's a footer. Again, check ./application_name/templates/base.html. </br>
+			<span class="copyright bar-text">&copy; Your Web Development Team 2018 </span>
+		</h4>
+	</div>
+
+	{% block scripts %}
+	
+	{% endblock scripts %}
+</body>
+</html>
