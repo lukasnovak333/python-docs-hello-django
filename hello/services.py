@@ -19,7 +19,7 @@ from django.views.decorators.csrf import csrf_exempt
 # Our content
 # from .models import *
 
-# @csrf_exempt
+@csrf_exempt
 # @require_http_methods(["POST"])
 def single_service(request):
 	try:
@@ -30,7 +30,7 @@ def single_service(request):
 
 		if 'conditionAndId' not in content:
 			return JsonResponse({'error': 'true', 'message': 'nocondandid'})
-			
+
 		cond_and_id = content['conditionAndId']
 
 		if 'finalResult' not in content:
