@@ -27,11 +27,6 @@ def single_service(request):
 		body_unicode = request.body.decode('utf-8')
 		content = json.loads(body_unicode)
 
-		if 'body' not in request:
-			return JsonResponse({'error': 'true', 'message': 'nobodyfound'})
-
-		content = request['body']
-
 		if 'conditionAndId' not in content:
 			return JsonResponse({'error': 'true', 'message': 'nocondandid'})
 
