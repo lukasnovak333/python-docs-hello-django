@@ -325,8 +325,8 @@ Final score: 0
 			      'Content-type': 'application/json',
 			    },
 			    body: JSON.stringify({
-			    		'conditionAndId': "hello", 
-			    		'finalResult': 5,
+			    		'conditionAndId': document.getElementById("txtarea").innerHTML, 
+			    		'finalResult': p4_total,
 			    }),
 			}).then(response => response.json()).then(json => console.log(json))
 
