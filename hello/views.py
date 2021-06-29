@@ -18,4 +18,4 @@ def hello(request):
         }
     }
 
-    return render(request, "component.html", context=context)
+    return render(request, "base.html", context=context)
