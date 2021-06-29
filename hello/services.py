@@ -39,7 +39,7 @@ def single_service(request):
 	"""
 
 	f= open("/home/site/textFiles/tmptest.txt","w+")
-	f.write('This is content!')
+	f.write('This is content! - modified in Home')
 	f.close()
 
 	return JsonResponse({'success': "true"})
