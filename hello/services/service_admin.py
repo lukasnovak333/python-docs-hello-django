@@ -34,4 +34,4 @@ def single_service(request):
 	    when the fetch call (or whatever ajax call you use)
 	    returns. 
 	"""
-	return success()
+	return JsonResponse({'success': "true"})
