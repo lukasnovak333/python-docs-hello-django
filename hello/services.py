@@ -23,6 +23,10 @@ from django.views.decorators.csrf import csrf_exempt
 # @require_http_methods(["POST"])
 def single_service(request):
 	try:
+
+		body_unicode = request.body.decode('utf-8')
+		content = json.loads(body_unicode)
+
 		if 'body' not in request:
 			return JsonResponse({'error': 'true', 'message': 'nobodyfound'})
 

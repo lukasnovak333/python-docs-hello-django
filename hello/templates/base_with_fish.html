@@ -328,7 +328,7 @@ Final score: 0
 			    		'conditionAndId': "hello", 
 			    		'finalResult': 5,
 			    }),
-			}).then(response => console.log(response))
+			}).then(response => response.json()).then(json => console.log(json))
 
 			return;
 		}
