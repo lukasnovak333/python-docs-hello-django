@@ -39,16 +39,21 @@ def single_service(request):
 	    returns. 
 	"""
 
-	content = request.body
-	cond_and_id = content['conditionAndId']
-	final_result = content['finalResult']
+	try:
+		content = request.body
+		cond_and_id = content['conditionAndId']
+		final_result = content['finalResult']
 
 
-	f= open("/home/site/textFiles/tmptest.txt","a")
-	f.write('----------------')
-	f.write('condition and Id - {}'.format(cond_and_id))
-	f.write('finalResult - {}'.format(final_result))
-	f.write('----------------')
-	f.close()
+		f= open("/home/site/textFiles/tmptest.txt","a")
+		f.write('----------------')
+		f.write('condition and Id - {}'.format(cond_and_id))
+		f.write('finalResult - {}'.format(final_result))
+		f.write('----------------')
+		f.close()
+		return JsonResponse({'success': "true"})
+		
+	except Exception as e:
+		return JsonResponse({'error': 'true', 'message': e})
 
-	return JsonResponse({'success': "true"})
+	
