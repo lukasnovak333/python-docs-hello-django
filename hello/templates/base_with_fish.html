@@ -316,7 +316,21 @@ Final score: 0
 			$("#game").hide();
 			document.getElementById("finish_total").innerHTML = "Final score: " + p4_total;
 			$("#finish").show();
-			alert("The game is over")
+
+			// Upload results
+			fetch('/services/postTestResult' {
+				method: 'POST',
+				headers: {
+			      'Accept': 'application/json',
+			      'Content-type': 'application/json',
+			    },
+			    body: JSON.stringify({
+			    		'conditionAndId': document.getElementById("txtarea").innerHTML, 
+			    		'finalResult': p4_total,
+			    }),
+			}).then(response => response.json())
+			.then((responseJson) => console.log(responseJson))
+
 			return;
 		}
 	}
