@@ -166,6 +166,7 @@ Thank you for playing!
 
 
 var output;
+var resultsJSON = {};
 var condition = NaN;
 var p1_lock = 0;
 var p2_lock = 0;
@@ -198,7 +199,7 @@ var bot_turn_offset_base = 500;
 var elements = ["#outputBox", "#connect", "#instructions", "#game", "#finish", "#consent_form", "#failure_case"]
 
 
-// Backslash show output functionality //////////////////////////////////////////////////////////////////
+// Keypress Handlers  //
 $(document).keydown(function(event) { 
 	// on Backslash
 	if(event.which == 220) {
@@ -208,10 +209,10 @@ $(document).keydown(function(event) {
 	// on Enter 
 	if(event.which == 13) { if(!isHidden("#game")) { turn_advance() }	}
 });
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-// Helper Functions ///////////////////////////////////////////////////////////////////////////////////// 
+
+// Helper Functions //
 function getByID(id) { return document.getElementById(id); }
 
 function hideAll() {
@@ -235,12 +236,12 @@ function shuffle(a){
 		a[j] = x; 
 	} 
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
 
-// Occurs once body is loaded ///////////////////////////////////////////////////////////////////////////
+// Occurs once body is loaded //
 function show_consent_form() { show("#consent_form"); }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Begins experiment
 function initiate_experiment(){
 	// Hide Consent Form
 	hide("#consent_form");
@@ -254,14 +255,19 @@ function initiate_experiment(){
 	output = getByID("outputBox")
 	output.innerHTML = "Cond:" + condition + ", ID:" + subject_id;
 
+	resultsJSON['cond'] = condition;
+	resultsJSON['id'] = subject_id;
+
 	show("#instructions")
 }
 
+// If not offering consent 
 function fail_experiment() {
 	hide("#consent_form");
 	show("#failure_case");
 }
 
+// Begins game
 function start_game(){
 	hide("#instructions")
 	show("#connect")
@@ -270,7 +276,7 @@ function start_game(){
 	setTimeout(function(){ show("#game"); hide("#connect"); }, game_start_time);
 }
 
-
+// Attempts to advance turn
 function turn_advance(){
 	if(p4_lock == 1 && (p1_lock * p2_lock * p3_lock == 0)){
 		alert("You Have Already Gone This Round! ");
@@ -293,14 +299,17 @@ function turn_advance(){
 		getByID("player_take").value = "";
 		return;
 	}
+
 	if(p4_lock == 0 && (p1_lock * p2_lock * p3_lock == 0)){
 		p4_lock = 1;
 		p4_total += p4_take;
 		pot_total -= p4_take;
 		logData = output.value;
-		additionalData = ", R" + round + ": " p4_take;
+		additionalData = ", R" + round + ": " + p4_take;
 		logData +=  additionalData;
 		output.innerHTML = logData;
+		resultsJSON['R' + round] = p4_take;
+
 		getByID("player_take").value = "";
 		refresh_p4();
 		computerTurn();
@@ -308,6 +317,7 @@ function turn_advance(){
 	}
 }
 
+// Has all AI make a choice
 function computerTurn(){
 	var center = Math.floor(Math.random() * bot_turn_rand_time) + bot_turn_base_time;
 	var offset = Math.floor(Math.random() * bot_turn_offset_rand) + bot_turn_offset_base;
@@ -318,7 +328,7 @@ function computerTurn(){
 	setTimeout(p3_turn, turn_time[2]);
 }
 
-
+// Advances the round after all choices have been made 
 function roundAdvance(){
 	pot_total = Math.ceil(pot_total * 1.1);
 	if(pot_total > 20000){ pot_total = 20000;}
@@ -334,12 +344,13 @@ function roundAdvance(){
 		hide("#game")
 		getByID("finish_total").innerHTML = "Final score: " + p4_total;
 		show("#finish")
-
+		resultsJSON['total'] = p4_total;
 		uploadResults()
 		return;
 	}
 }
 
+// Uploads results to server where they are appended to text file
 function uploadResults() {
 			// Upload results
 		fetch('/services/postTestResult', {
@@ -348,13 +359,11 @@ function uploadResults() {
 		      'Accept': 'application/json',
 		      'Content-type': 'application/json',
 		    },
-		    body: JSON.stringify({
-		    		'conditionAndId': getByID("outputBox").innerHTML, 
-		    		'finalResult': p4_total,
-		    }),
+		    body: JSON.stringify(resultsJSON),
 		}).then(response => response.json()).then(json => console.log(json))
 }
 
+// These are all bot turns 
 function p1_turn() {
 	if(condition == 0) { p1_take = p1_moves[(round - 1)]; }
 	if(condition == 1) { p1_take = p1_moves[(6 + (round - 1))]; }
@@ -412,7 +421,6 @@ function refresh_p4() {
 	getByID("player_text").innerHTML = "Player 4 (You) Total: " + p4_total;
 }
 
-$(window).on('beforeunload', function() { return 'Save Data Before Exiting!'; });
 </script>
 {% endblock scripts %}
 </body>
