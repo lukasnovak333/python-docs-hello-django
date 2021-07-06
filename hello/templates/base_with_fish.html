@@ -214,7 +214,9 @@ var bot_turn_base_time = 2000;
 var bot_turn_offset_rand = 500;
 var bot_turn_offset_base = 500;
 
-var elements = ["#outputBox", "#connect", "#instructions", "#game", "#finish", "#consent_form", "#failure_case"]
+var NUM_ROUNDS = 2;
+
+var elements = ["#outputBox", "#connect", "#instructions", "#game", "#finish", "#consent_form", "#failure_case", "#survey_item"]
 
 
 // Keypress Handlers  //
@@ -358,7 +360,7 @@ function roundAdvance(){
 	getByID("round_text").innerHTML = "Round " + round;
 	getByID("pot_text").innerHTML = "Total Fish = " + pot_total;
 
-	if(round == 7){
+	if(round == NUM_ROUNDS){
 		hide("#game")
 		getByID("finish_total").innerHTML = "Final score: " + p4_total;
 		show("#finish")
@@ -421,12 +423,12 @@ function populateSurveyItem(index) {
 
 function iterate_survey_item() {
 	// Check survey is filled out
-	let checked = false
+	let checked = false;
 	let value = NaN;
 
 	for(let i = 1; i <= 4; i++) {
 		let radioID = "#radio-" + i;
-		let input = getByID(radioID)
+		let input = getByID(radioID);
 		if(input.checked) {
 			checked = true;
 			value = input.value;
@@ -444,9 +446,15 @@ function iterate_survey_item() {
 		'item': survey_item_index,
 		'question': getByID('#survey_question').innerHTML,
 		'response': value
-	})
-	
+	});
+
 	survey_item_index++;
+	
+	if(survey_item_index == survey_object.length) {
+		// Show true return and thank you page
+		return;
+	}
+
 	populateSurveyItem(survey_item_index);
 }
 
@@ -511,7 +519,7 @@ function refresh_p4() {
 
 function randomSurveyOrder() {
 	let base = []
-	for(var i = 1; i <= survey_object.length; i++) {
+	for(var i = 0; i < survey_object.length; i++) {
 		base.push(i);
 	}
 	shuffle(base)
