@@ -229,7 +229,7 @@ function initiate(){
 	// Get subid
 	while(isNaN(condition)) {
 		var subject_id = window.prompt("Enter a Valid Participant ID");
-		condition = (subject_id % 3) + 1;
+		condition = (subject_id % 3);
 	}
 
 	output = getByID("outputBox")
@@ -300,10 +300,9 @@ function roundAdvance(){
 	if(pot_total > 20000){ pot_total = 20000;}
 
 	round++;
-	p1_lock = 0;
-	p2_lock = 0;
-	p3_lock = 0;
-	p4_lock = 0;
+
+	p1_lock = 0; p2_lock = 0; p3_lock = 0; p4_lock = 0;
+
 	getByID("round_text").innerHTML = "Round " + round;
 	getByID("pot_text").innerHTML = "Total Fish = " + pot_total;
 
