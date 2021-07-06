@@ -275,7 +275,7 @@ function turn_advance(){
 		p4_total += p4_take;
 		pot_total -= p4_take;
 		logData = output.value;
-		logData +=  "," + p4_take;
+		logData +=  ", R" + round + ": " p4_take;
 		output.innerHTML = logData;
 		getByID("player_take").value = "";
 		refresh_p4();
