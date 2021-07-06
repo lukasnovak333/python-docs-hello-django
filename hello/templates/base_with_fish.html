@@ -93,7 +93,7 @@ The number of chances you have to win the gift card depends on how many fish you
 
 Each fish you catch gives you 1 chance in the lottery.
 
-<input type="button" onclick="start_game()" value="Start Game!">
+<input id="start_button" type="button" onclick="start_game()" value="Start Game!">
 </pre>
 
 <div id="game">
@@ -192,6 +192,7 @@ Thank you for playing!
 		$("#game").hide();
 		$("#finish").hide();
 		$("#instructions").show();
+		$("#start_button").show();
 
 		// Get subid
 		var condition = NaN
