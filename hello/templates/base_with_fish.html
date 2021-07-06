@@ -290,9 +290,8 @@ function shuffle(a){
 
 function roundAdvance(){
 	pot_total = Math.ceil(pot_total * 1.1);
-	if(pot_total > 20000){
-		pot_total = 20000;
-	}
+	if(pot_total > 20000){ pot_total = 20000;}
+
 	round++;
 	p1_lock = 0;
 	p2_lock = 0;
@@ -301,9 +300,9 @@ function roundAdvance(){
 	getByID("round_text").innerHTML = "Round " + round;
 	getByID("pot_text").innerHTML = "Total Fish = " + pot_total;
 	if(round == 7){
-		$("#game").hide();
+		hide("#game")
 		getByID("finish_total").innerHTML = "Final score: " + p4_total;
-		$("#finish").show();
+		show("#finish")
 
 		// Upload results
 		fetch('/services/postTestResult', {

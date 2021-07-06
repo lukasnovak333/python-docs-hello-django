@@ -38,7 +38,7 @@ def single_service(request):
 		final_result = content['finalResult']
 
 
-		f= open("/home/site/textFiles/newtest.txt","w+")
+		f= open("/home/site/textFiles/newtest.txt","a+")
 		f.write('----------------')
 		f.write('condition and Id - {}'.format(cond_and_id))
 		f.write('finalResult - {}'.format(final_result))
