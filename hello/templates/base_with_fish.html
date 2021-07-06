@@ -21,12 +21,15 @@
 		}
 
 		p.scorebox{
-			font-size: 2em;
+			
+			width: 100%;
 		}
 
 		p.scorebox_interior{
-			border-style: solid;
+			font-size: 2em;
+			border-style: black solid;
 			width: 250px;
+			margin: auto;
 		}
 
 		#round_text {
@@ -36,6 +39,7 @@
 
 		#game_board {
 			text-align: center;
+			border: black solid;
 		}
 
 		#start_button {
@@ -148,7 +152,7 @@ Thank you for playing!
 
 
 var output;
-var condition = 0;
+var condition = NaN;
 var p1_lock = 0;
 var p2_lock = 0;
 var p3_lock = 0;
@@ -166,6 +170,8 @@ var p1_take = 0;
 var p2_take = 0;
 var p3_take = 0;
 var p4_take = 0;
+
+
 var p1_connect_time = 250;
 var p3_connect_time  = 400;
 var game_start_time = 500;
@@ -204,13 +210,23 @@ function hide(id) { $(id).css('display', 'none') }
 function show(id) { $(id).css('display', 'block') }
 
 function isHidden(id) { return ($(id).css('display') == 'none') }
+
+
+function shuffle(a){ 
+	var j, x, i; 
+	for (i = a.length; i; i--) { 
+		j = Math.floor(Math.random() * i); 
+		x = a[i - 1]; 
+		a[i - 1] = a[j]; 
+		a[j] = x; 
+	} 
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 // Occurs once body is loaded ///////////////////////////////////////////////////////////////////////////
 function initiate(){
 	// Get subid
-	var condition = NaN
 	while(isNaN(condition)) {
 		var subject_id = window.prompt("Enter a Valid Participant ID");
 		condition = (subject_id % 3) + 1;
@@ -278,15 +294,6 @@ function computerTurn(){
 	setTimeout(p3_turn, turn_time[2]);
 }
 
-function shuffle(a){ 
-	var j, x, i; 
-	for (i = a.length; i; i--) { 
-		j = Math.floor(Math.random() * i); 
-		x = a[i - 1]; 
-		a[i - 1] = a[j]; 
-		a[j] = x; 
-	} 
-}
 
 function roundAdvance(){
 	pot_total = Math.ceil(pot_total * 1.1);
@@ -305,7 +312,13 @@ function roundAdvance(){
 		getByID("finish_total").innerHTML = "Final score: " + p4_total;
 		show("#finish")
 
-		// Upload results
+		uploadResults()
+		return;
+	}
+}
+
+function uploadResults() {
+			// Upload results
 		fetch('/services/postTestResult', {
 			method: 'POST',
 			headers: {
@@ -317,8 +330,6 @@ function roundAdvance(){
 		    		'finalResult': p4_total,
 		    }),
 		}).then(response => response.json()).then(json => console.log(json))
-		return;
-	}
 }
 
 function p1_turn() {
