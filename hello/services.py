@@ -7,6 +7,7 @@
 # Python Imports
 import json 
 import sys
+import time
 sys.path.append("..")
 
 # Basic Django Tools
@@ -27,21 +28,20 @@ def single_service(request):
 		body_unicode = request.body.decode('utf-8')
 		content = json.loads(body_unicode)
 
-		if 'conditionAndId' not in content:
-			return JsonResponse({'error': 'true', 'message': 'nocondandid'})
+		resultsObj = {}
 
-		cond_and_id = content['conditionAndId']
-
-		if 'finalResult' not in content:
-			return JsonResponse({'error': 'true', 'message': 'nocondandid'})
-
-		final_result = content['finalResult']
+		for key in ['cond', 'id', 'R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'total']:
+			if key not in content:
+				return JsonResponse({'error': 'true', 'message': 'no' + key})
+			else:
+				resultsObj[key] = content[key]
 
 
-		f= open("/home/site/textFiles/newtest.txt","a+")
+		f= open("/home/site/textFiles/db.txt","a+")
 		f.write('----------------')
-		f.write('condition and Id - {}'.format(cond_and_id))
-		f.write('finalResult - {}'.format(final_result))
+		f.write('' + time.ctime(time.time()))
+		f.write('\n')
+		f.write(json.dumps(resultsObj, indent=4))
 		f.write('----------------')
 		f.close()
 		return JsonResponse({'success': "true"})
