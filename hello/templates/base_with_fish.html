@@ -184,7 +184,8 @@ Thank you for playing!
 	function getID(id) { return document.getElementById(id); }
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// Start up 
+
+	// Occurs once body is loaded ///////////////////////////////////////////////////////////////////////////
 	function initiate(){
 		// Hide Everything
 		$("#connect").hide();
@@ -204,6 +205,7 @@ Thank you for playing!
 
 		$("#outputBox").hide();
 	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	function start_game(){
 		$("#instructions").hide();
@@ -368,25 +370,25 @@ Thank you for playing!
 	}
 
 	function refresh_p1() {
-		getID("p1").innerHTML = "Player 1 Take For Round " + round + ": " + p1_take;
+		getID("p1").innerHTML = "Player 1 Took For Round " + round + ": " + p1_take;
 		getID("pot_text").innerHTML = "Total Fish = " + pot_total;
 		getID("p1_text").innerHTML = "Player 1 Total: " + p1_total;
 	}
 
 	function refresh_p2() {
-		getID("p2").innerHTML = "Player 2 Take For Round " + round + ": " + p2_take;
+		getID("p2").innerHTML = "Player 2 Took For Round " + round + ": " + p2_take;
 		getID("pot_text").innerHTML = "Total Fish = " + pot_total;
 		getID("p2_text").innerHTML = "Player 2 Total: " + p2_total;
 	}
 
 	function refresh_p3() {
-		getID("p3").innerHTML = "Player 3 Take For Round " + round + ": " + p3_take;
+		getID("p3").innerHTML = "Player 3 Took For Round " + round + ": " + p3_take;
 		getID("pot_text").innerHTML = "Total Fish = " + pot_total;
 		getID("p3_text").innerHTML = "Player 3 Total: " + p3_total;
 	}
 
 	function refresh_p4() {
-		getID("p4").innerHTML = "Player 4 (You) Take For Round " + round + ": " + p4_take;
+		getID("p4").innerHTML = "Player 4 (You) Took For Round " + round + ": " + p4_take;
 		getID("pot_text").innerHTML = "Total Fish = " + pot_total;
 		getID("player_text").innerHTML = "Player 4 (You) Total: " + p4_total;
 	}
