@@ -37,6 +37,10 @@
 		#game_board {
 			text-align: center;
 		}
+
+		#start_button {
+			font-size: 2em;
+		}
 		</style>
 {% endblock styles %}
 </head>
@@ -145,7 +149,6 @@ Thank you for playing!
 
 var output;
 var condition = 0;
-var hideOutput = 1;
 var p1_lock = 0;
 var p2_lock = 0;
 var p3_lock = 0;
@@ -176,17 +179,20 @@ var elements = ["#outputBox", "#connect", "#instructions", "#game", "#finish"]
 
 
 // Backslash show output functionality //////////////////////////////////////////////////////////////////
-$(document).keydown(function(event) { if(event.which == 220) { toggleHidden(); } });
-
-function toggleHidden(){
-	if(hideOutput == 1) { $("#outputBox").show(); hideOutput = 0; }
-	else { $("#outputBox").hide(); hideOutput = 1; }
-}
+$(document).keydown(function(event) { 
+	// on Backslash
+	if(event.which == 220) {
+		if(isHidden("#outputBox")) { show("#outputBox") }
+		else { hide("#outputBox") }
+	} 
+	// on Enter 
+	if(event.which == 13) { if(!isHidden("#game")) { turn_advance() }	}
+});
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 // Helper Functions ///////////////////////////////////////////////////////////////////////////////////// 
-function getID(id) { return document.getElementById(id); }
+function getByID(id) { return document.getElementById(id); }
 
 function hideAll() {
 	for(let i = 0; i < elements.length; i++)
@@ -196,6 +202,8 @@ function hideAll() {
 function hide(id) { $(id).css('display', 'none') }
 
 function show(id) { $(id).css('display', 'block') }
+
+function isHidden(id) { return( ($(id).css('display') == 'none') }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -208,7 +216,7 @@ function initiate(){
 		condition = (subject_id % 3) + 1;
 	}
 
-	output = getID("outputBox")
+	output = getByID("outputBox")
 	output.innerHTML = "Cond:" + condition + ", ID:" + subject_id;
 
 	show("#instructions")
@@ -216,34 +224,34 @@ function initiate(){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function start_game(){
-	$("#instructions").hide();
-	$("#connect").show();
-	setTimeout(function(){ getID("p1_connect").innerHTML = "Player 1 - Connected"}, p1_connect_time);
-	setTimeout(function(){ getID("p3_connect").innerHTML = "Player 3 - Connected"}, p3_connect_time);
-	setTimeout(function(){ $("#game").show(); $("#connect").hide(); }, game_start_time);
+	hide("#instructions")
+	show("#connect")
+	setTimeout(function(){ getByID("p1_connect").innerHTML = "Player 1 - Connected"}, p1_connect_time);
+	setTimeout(function(){ getByID("p3_connect").innerHTML = "Player 3 - Connected"}, p3_connect_time);
+	setTimeout(function(){ show("#game"); hide("#connect"); }, game_start_time);
 }
 
 
 function turn_advance(){
 	if(p4_lock == 1 && (p1_lock * p2_lock * p3_lock == 0)){
 		alert("You Have Already Gone This Round! ");
-		getID("player_take").value = "";
+		getByID("player_take").value = "";
 		return;
 	}
-	p4_take = parseInt(getID("player_take").value);
+	p4_take = parseInt(getByID("player_take").value);
 	if(isNaN(p4_take)){
 		alert("Please enter a number! ");
-		getID("player_take").value = "";
+		getByID("player_take").value = "";
 		return;
 	}
 	if(p4_take < 0){
 		alert("Please enter a number greater than 0! ");
-		getID("player_take").value = "";
+		getByID("player_take").value = "";
 		return;
 	}
 	if(p4_take > 1200){
 		alert("Please enter a number smaller than or equal to 1200! ");
-		getID("player_take").value = "";
+		getByID("player_take").value = "";
 		return;
 	}
 	if(p4_lock == 0 && (p1_lock * p2_lock * p3_lock == 0)){
@@ -253,7 +261,7 @@ function turn_advance(){
 		logData = output.value;
 		logData +=  "," + p4_take;
 		output.innerHTML = logData;
-		getID("player_take").value = "";
+		getByID("player_take").value = "";
 		refresh_p4();
 		computerTurn();
 		return;
@@ -290,11 +298,11 @@ function roundAdvance(){
 	p2_lock = 0;
 	p3_lock = 0;
 	p4_lock = 0;
-	getID("round_text").innerHTML = "Round " + round;
-	getID("pot_text").innerHTML = "Total Fish = " + pot_total;
+	getByID("round_text").innerHTML = "Round " + round;
+	getByID("pot_text").innerHTML = "Total Fish = " + pot_total;
 	if(round == 7){
 		$("#game").hide();
-		getID("finish_total").innerHTML = "Final score: " + p4_total;
+		getByID("finish_total").innerHTML = "Final score: " + p4_total;
 		$("#finish").show();
 
 		// Upload results
@@ -305,7 +313,7 @@ function roundAdvance(){
 		      'Content-type': 'application/json',
 		    },
 		    body: JSON.stringify({
-		    		'conditionAndId': getID("outputBox").innerHTML, 
+		    		'conditionAndId': getByID("outputBox").innerHTML, 
 		    		'finalResult': p4_total,
 		    }),
 		}).then(response => response.json()).then(json => console.log(json))
@@ -367,51 +375,51 @@ function refreshUI() {
 }
 
 function refresh_p1() {
-	getID("p1").innerHTML = "Player 1 Took For Round " + round + ": " + p1_take;
-	getID("pot_text").innerHTML = "Total Fish = " + pot_total;
-	getID("p1_text").innerHTML = "Player 1 Total: " + p1_total;
+	getByID("p1").innerHTML = "Player 1 Took For Round " + round + ": " + p1_take;
+	getByID("pot_text").innerHTML = "Total Fish = " + pot_total;
+	getByID("p1_text").innerHTML = "Player 1 Total: " + p1_total;
 }
 
 function refresh_p2() {
-	getID("p2").innerHTML = "Player 2 Took For Round " + round + ": " + p2_take;
-	getID("pot_text").innerHTML = "Total Fish = " + pot_total;
-	getID("p2_text").innerHTML = "Player 2 Total: " + p2_total;
+	getByID("p2").innerHTML = "Player 2 Took For Round " + round + ": " + p2_take;
+	getByID("pot_text").innerHTML = "Total Fish = " + pot_total;
+	getByID("p2_text").innerHTML = "Player 2 Total: " + p2_total;
 }
 
 function refresh_p3() {
-	getID("p3").innerHTML = "Player 3 Took For Round " + round + ": " + p3_take;
-	getID("pot_text").innerHTML = "Total Fish = " + pot_total;
-	getID("p3_text").innerHTML = "Player 3 Total: " + p3_total;
+	getByID("p3").innerHTML = "Player 3 Took For Round " + round + ": " + p3_take;
+	getByID("pot_text").innerHTML = "Total Fish = " + pot_total;
+	getByID("p3_text").innerHTML = "Player 3 Total: " + p3_total;
 }
 
 function refresh_p4() {
-	getID("p4").innerHTML = "Player 4 (You) Took For Round " + round + ": " + p4_take;
-	getID("pot_text").innerHTML = "Total Fish = " + pot_total;
-	getID("player_text").innerHTML = "Player 4 (You) Total: " + p4_total;
+	getByID("p4").innerHTML = "Player 4 (You) Took For Round " + round + ": " + p4_take;
+	getByID("pot_text").innerHTML = "Total Fish = " + pot_total;
+	getByID("player_text").innerHTML = "Player 4 (You) Total: " + p4_total;
 }
 
 function clear_p1() {
-	getID("pot_text").innerHTML = "Total Fish =";
-	getID("p1").innerHTML = "Player 1 Take: ";
-	getID("p1_text").innerHTML = "Player 1 Total:";
+	getByID("pot_text").innerHTML = "Total Fish =";
+	getByID("p1").innerHTML = "Player 1 Take: ";
+	getByID("p1_text").innerHTML = "Player 1 Total:";
 }
 
 function clear_p2(){
-	getID("pot_text").innerHTML = "Total Fish =";
-	getID("p2").innerHTML = "Player 2 Take: ";
-	getID("p2_text").innerHTML = "Player 2 Total:";
+	getByID("pot_text").innerHTML = "Total Fish =";
+	getByID("p2").innerHTML = "Player 2 Take: ";
+	getByID("p2_text").innerHTML = "Player 2 Total:";
 }
 
 function clear_p3(){
-	getID("pot_text").innerHTML = "Total Fish =";
-	getID("p3").innerHTML = "Player 3 Take: ";
-	getID("p3_text").innerHTML = "Player 3 Total:";
+	getByID("pot_text").innerHTML = "Total Fish =";
+	getByID("p3").innerHTML = "Player 3 Take: ";
+	getByID("p3_text").innerHTML = "Player 3 Total:";
 }
 
 function clear_p4(){
-	getID("player_text").innerHTML = "Player Total:";
-	getID("p4").innerHTML = "Player 4 (You) Take: ";
-	getID("player_text").innerHTML = "Player 4 (You) Total: ";
+	getByID("player_text").innerHTML = "Player Total:";
+	getByID("p4").innerHTML = "Player 4 (You) Take: ";
+	getByID("player_text").innerHTML = "Player 4 (You) Total: ";
 }
 
 $(window).on('beforeunload', function() { return 'Save Data Before Exiting!'; });
