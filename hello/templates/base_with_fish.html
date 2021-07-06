@@ -36,6 +36,13 @@
 			font-size: 120%;
 			font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 		}
+
+
+		/* Hide everything at the beginning */
+		body * {
+			visibility: hidden;
+		}
+
 		</style>
 {% endblock styles %}
 </head>
@@ -183,6 +190,7 @@ Thank you for playing!
 		$("#connect").hide();
 		$("#game").hide();
 		$("#finish").hide();
+		$("#instructions").show();
 
 		// Get subid
 		var condition = NaN
