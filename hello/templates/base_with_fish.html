@@ -79,6 +79,23 @@ This is what you do now.
 	<p id="p4_connect"> Player 4 - Connected </p>
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
+<!-- Generic Survey Item ---------------------------------------------------------------------------------------------->
+<pre id=survey_item style="display:none;">
+	<p id='survey_question'> </p>
+	<form id='survey_form'>
+		<input type="radio" id="radio-1"  name="radio-1" value="Value1">
+		<label id="radio-1-label" for="radio-1"> Value1 </label><br/>
+		<input type="radio" id="radio-2"  name="radio-2" value="Value2">
+		<label id="radio-2-label" for="radio-2"> Value2 </label><br/>
+		<input type="radio" id="radio-3"  name="radio-3" value="Value3">
+		<label id="radio-3-label" for="radio-3"> Value3 </label><br/>
+		<input type="radio" id="radio-4"  name="radio-4" value="Value4">
+		<label id="radio-4-label" for="radio-4"> Value4 </label><br/>
+	</form>
+	<input type="button" id="survey-iterator" onclick="iterate_survey_item()" value="Next">
+</pre>
+<!--------------------------------------------------------------------------------------------------------------------->
+
 
 <!-- Instructional Content -------------------------------------------------------------------------------------------->
 <pre id="instructions" style="display:none;">
@@ -153,6 +170,7 @@ Thank you for playing!
 6 rounds provided all the information that we need, so we will end the game now. 
 <strong>Please return to the survey administrator.</strong>
 <pre id="finish_total"> Final score: 0 </pre>
+<input type="button" id="admin-surveys" onclick="administer_surveys()" value="Proceed to Survey"/>
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
 
@@ -363,6 +381,64 @@ function uploadResults() {
 		}).then(response => response.json()).then(json => console.log(json))
 }
 
+function administer_surveys() {
+	hide("#finish")
+	populateSurveyItem(survey_item_index)
+	show("#survey_form")
+}
+
+function populateSurveyItem(index) {
+		let relQuestionIndex = random_survey_indices[index]
+		let questionObj = survey_object[relQuestionIndex]
+
+		let question = questionObj['question']
+		let responses = questionObj['responses']
+		getByID('#survey_question').innerHTML = question
+		for(let i = 0; i < responses.length; i++){
+			let radioKey = (i + 1);
+			let radioID = "#radio-" + radioKey;
+			let labelID = "#radio-" + radioKey + "-label";
+
+			let input = getByID(radioID);
+			input.value = responses[i];
+			input.checked = false;
+			let label = getByID(labelID);
+			label.innerHTML = responses[i];
+			show(radioID);
+			show(labelID);
+		}
+
+		if(responses.length < 4) {
+			for(let i = 4; i > responses.length; i--) {
+				let radioID = "#radio-" + i;
+				let labelID = "#radio-" + i + "-label";
+				getByID(radioID).checked = false;
+				hide(radioID);
+				hide(labelID);
+			}
+		}
+}
+
+function iterate_survey_item() {
+	// Check survey is filled out
+	let checked = false
+	for(let i = 1; i <= 4; i++) {
+		let radioID = "#radio-" + i;
+		let input = getByID(radioID)
+		if(input.checked) checked = true
+	}
+
+	if(checked == false) {
+		alert("Please answer the question before clicking next.");
+		return;
+	}
+
+	// Proceed
+	survey_item_index++;
+	populateSurveyItem(survey_item_index);
+}
+
+
 // These are all bot turns 
 function p1_turn() {
 	if(condition == 0) { p1_take = p1_moves[(round - 1)]; }
@@ -420,6 +496,23 @@ function refresh_p4() {
 	getByID("pot_text").innerHTML = "Total Fish = " + pot_total;
 	getByID("player_text").innerHTML = "Player 4 (You) Total: " + p4_total;
 }
+
+function randomSurveyOrder() {
+	let base = []
+	for(var i = 1; i <= survey_object.length; i++) {
+		base.push(i);
+	}
+	shuffle(base)
+	return base
+}
+
+var survey_object = [
+{'question': "How many eggs would you like?", 'responses': ["One", "Two", "Three"]},
+{'question': "Are you likable?", 'responses': ["Yes", "No", "I don't know", "Maybe"]}
+]
+
+var random_survey_indices = randomSurveyOrder()
+var survey_item_index = 0
 
 </script>
 {% endblock scripts %}
