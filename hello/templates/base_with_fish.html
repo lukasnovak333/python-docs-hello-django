@@ -51,12 +51,26 @@
 
 
 
-<body onload="initiate()">
+<body onload="show_consent_form()">
 
 <!-- Hidden Data Storage Area ----------------------------------------------------------------------------------------->
 <textarea id="outputBox" rows="22" cols="15" style="display:none; position: absolute; height: 10%; width: 10%; left: 0; top: 0;" readonly> </textarea>
 <!--------------------------------------------------------------------------------------------------------------------->
 
+<!-- Consent Form ----------------------------------------------------------------------------------------------------->
+<pre id="consent_form" style="display:none;">
+<strong>Consent Form</strong>
+This is the content of a consent form. Do you consent?
+<input id="consent_affirmative" type="button" onclick="initiate_experiment()" value="I consent">
+<input id="consent_negative" type="button" onclick="fail_experiment()" value="I do not consent">
+</pre>
+<!--------------------------------------------------------------------------------------------------------------------->
+<!-- Failure Case-------------------------------------------------------------------------------------------->
+<pre id="failure_case" style="display:none;">
+<strong>Thank You</strong>
+This is what you do now. 
+</pre>
+<!--------------------------------------------------------------------------------------------------------------------->
 <!-- Connection Screen ------------------------------------------------------------------------------------------------>
 <pre id=connect style="display:none;">
 	<p id="p1_connect"> Player 1 - Not Connected </p>
@@ -181,7 +195,7 @@ var bot_turn_base_time = 2000;
 var bot_turn_offset_rand = 500;
 var bot_turn_offset_base = 500;
 
-var elements = ["#outputBox", "#connect", "#instructions", "#game", "#finish"]
+var elements = ["#outputBox", "#connect", "#instructions", "#game", "#finish", "#consent_form", "#failure_case"]
 
 
 // Backslash show output functionality //////////////////////////////////////////////////////////////////
@@ -223,9 +237,14 @@ function shuffle(a){
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 // Occurs once body is loaded ///////////////////////////////////////////////////////////////////////////
-function initiate(){
+function show_consent_form() { show("#consent_form"); }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function initiate_experiment(){
+	// Hide Consent Form
+	hide("#consent_form");
+
 	// Get subid
 	while(isNaN(condition)) {
 		var subject_id = window.prompt("Enter a Valid Participant ID");
@@ -237,7 +256,11 @@ function initiate(){
 
 	show("#instructions")
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function fail_experiment() {
+	hide("#consent_form");
+	show("#failure_case");
+}
 
 function start_game(){
 	hide("#instructions")
