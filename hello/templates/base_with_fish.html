@@ -42,11 +42,11 @@
 <body onload="initiate()">
 
 <!-- Hidden Data Storage Area ----------------------------------------------------------------------------------------->
-<textarea id="outputBox" rows="22" cols="15" readonly> </textarea>
+<textarea id="outputBox" rows="22" cols="15" style="display:none;" readonly> </textarea>
 <!--------------------------------------------------------------------------------------------------------------------->
 
 <!-- Connection Screen ------------------------------------------------------------------------------------------------>
-<pre id=connect>
+<pre id=connect style="display:none;">
 	<p id="p1_connect"> Player 1 - Not Connected </p>
 	<p id="p2_connect"> Player 2 - Connected </p>
 	<p id="p3_connect"> Player 3 - Not Connected </p>
@@ -92,7 +92,7 @@ Each fish you catch gives you 1 chance in the lottery.
 <!--------------------------------------------------------------------------------------------------------------------->
 
 <!-- Game Content ----------------------------------------------------------------------------------------------------->
-<div id="game">
+<div id="game" style="display:none;">
 	<p id = "round_text"> Round 1 </p>
 	<pre>
 	Remember:	Each turn represents 1 year
@@ -122,7 +122,7 @@ Each fish you catch gives you 1 chance in the lottery.
 <!--------------------------------------------------------------------------------------------------------------------->
 
 <!--Finish Screen ----------------------------------------------------------------------------------------------------->
-<pre id="finish">
+<pre id="finish" style="display: none;">
 Thank you for playing! 
 6 rounds provided all the information that we need, so we will end the game now. 
 <strong>Please return to the survey administrator.</strong>
