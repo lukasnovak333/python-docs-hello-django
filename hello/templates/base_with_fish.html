@@ -170,7 +170,7 @@ Thank you for playing!
 
 		// Get subid
 		var condition = NaN
-		while(condition == NaN) {
+		while(isNaN(condition)) {
 			var subject_id = window.prompt("Enter a Valid Participant ID");
 			condition = (subject_id % 3) + 1;
 		}
