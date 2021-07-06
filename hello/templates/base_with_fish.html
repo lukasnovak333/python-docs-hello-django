@@ -395,28 +395,28 @@ function populateSurveyItem(index) {
 
 		let question = questionObj['question']
 		let responses = questionObj['responses']
-		getByID('#survey_question').innerHTML = question
+		getByID('survey_question').innerHTML = question
 		for(let i = 0; i < responses.length; i++){
 			let radioKey = (i + 1);
-			let radioID = "#radio-" + radioKey;
-			let labelID = "#radio-" + radioKey + "-label";
+			let radioID = "radio-" + radioKey;
+			let labelID = "radio-" + radioKey + "-label";
 
 			let input = getByID(radioID);
 			input.value = responses[i];
 			input.checked = false;
 			let label = getByID(labelID);
 			label.innerHTML = responses[i];
-			show(radioID);
-			show(labelID);
+			show("#" + radioID);
+			show("#" + labelID);
 		}
 
 		if(responses.length < 4) {
 			for(let i = 4; i > responses.length; i--) {
-				let radioID = "#radio-" + i;
-				let labelID = "#radio-" + i + "-label";
+				let radioID = "radio-" + i;
+				let labelID = "radio-" + i + "-label";
 				getByID(radioID).checked = false;
-				hide(radioID);
-				hide(labelID);
+				hide("#" + radioID);
+				hide("#" + labelID);
 			}
 		}
 }
@@ -427,7 +427,7 @@ function iterate_survey_item() {
 	let value = NaN;
 
 	for(let i = 1; i <= 4; i++) {
-		let radioID = "#radio-" + i;
+		let radioID = "radio-" + i;
 		let input = getByID(radioID);
 		if(input.checked) {
 			checked = true;
@@ -444,12 +444,12 @@ function iterate_survey_item() {
 	// Proceed
 	resultsJSON['surveyResults'].push({
 		'item': survey_item_index,
-		'question': getByID('#survey_question').innerHTML,
+		'question': getByID('survey_question').innerHTML,
 		'response': value
 	});
 
 	survey_item_index++;
-	
+
 	if(survey_item_index == survey_object.length) {
 		// Show true return and thank you page
 		return;
