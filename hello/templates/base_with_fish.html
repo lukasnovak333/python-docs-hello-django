@@ -8,7 +8,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 		<style type = "text/css">
 
-		b
+		body
 		{
 			background: grey;
 		}
@@ -49,22 +49,14 @@
 
 
 <body onload="initiate()">
-<textarea id="txtarea" rows="22" cols="15" readonly>
+<textarea id="outputBox" rows="22" cols="15" readonly>
 </textarea>
 
 <pre id=connect>
-<p id="p1_connect">
-Player 1 - Not Connected
-</p>
-<p id="p2_connect">
-Player 2 - Connected
-</p>
-<p id="p3_connect">
-Player 3 - Not Connected
-</p>
-<p id="p4_connect">
-Player 4 - Connected
-</p>
+<p id="p1_connect"> Player 1 - Not Connected </p>
+<p id="p2_connect"> Player 2 - Connected </p>
+<p id="p3_connect"> Player 3 - Not Connected </p>
+<p id="p4_connect"> Player 4 - Connected </p>
 </pre>
 
 <pre id="instructions">
@@ -89,57 +81,36 @@ Each fish you catch gives you 1 chance in the lottery.
 </pre>
 
 <div id="game">
-<p id = "round_text">
-Round 1
-</p>
-<pre>
-Remember:	Each turn represents 1 year
-			Every year the number of fish increases by 10% of the total 
-			The lake cannot hold more than 20,000 fish 
-			By law, you can catch up to 1200 fish each year
-			You have to catch 450 each turn to feed and take care of your family.			
-			Your total at the end = total number of chances to win a $100 Amazon gift card 
-</pre>
-<p id= "pot_text">
-Total Fish = 20000
-</p>
-<p id= "p1">
-Player 1 Take:
-</p>
-<p id="p1_text" class="scorebox">
-Player 1 Total: 0
-</p>
-<p id= "p2">
-Player 2 Take:
-</p>
-<p id="p2_text" class="scorebox">
-Player 2 Total: 0
-</p>
-<p id= "p3">
-Player 3 Take:
-</p>
-<p id="p3_text" class="scorebox">
-Player 3 Total: 0
-</p>
-<p id= "p4">
-Player 4 (You) Take: 
-</p>
-<input type="text" id="player_take">
-<input type="button" onclick="turn_advance()" id="game_button" value="Take">
-<p id="player_text" class="scorebox">
-Player 4 (You) Total: 0
-</p>
+	<p id = "round_text"> Round 1 </p>
+	<pre>
+	Remember:	Each turn represents 1 year
+				Every year the number of fish increases by 10% of the total 
+				The lake cannot hold more than 20,000 fish 
+				By law, you can catch up to 1200 fish each year
+				You have to catch 450 each turn to feed and take care of your family.			
+				Your total at the end = total number of chances to win a $100 Amazon gift card 
+	</pre>
+
+	<p id= "pot_text"> Total Fish = 20000 </p>
+	<p id= "p1"> Player 1 Take: </p>
+	<p id="p1_text" class="scorebox"> Player 1 Total: 0 </p>
+	<p id= "p2"> Player 2 Take: </p>
+	<p id="p2_text" class="scorebox"> Player 2 Total: 0 </p>
+	<p id= "p3"> Player 3 Take: </p>
+	<p id="p3_text" class="scorebox"> Player 3 Total: 0 </p>
+	<p id= "p4"> Player 4 (You) Take:  </p>
+
+	<input type="text" id="player_take">
+	<input type="button" onclick="turn_advance()" id="game_button" value="Take">
+
+	<p id="player_text" class="scorebox"> Player 4 (You) Total: 0 </p>
 </div>
 
 <pre id="finish">
 Thank you for playing! 
-
 6 rounds provided all the information that we need, so we will end the game now. 
-
 <strong>Please return to the survey administrator.</strong>
-<pre id="finish_total">
-Final score: 0
-</pre>
+<pre id="finish_total"> Final score: 0 </pre>
 </pre>
 
 	{% block scripts %}
@@ -181,78 +152,68 @@ Final score: 0
 	var bot_turn_offset_base = 500;
 
 
-	$(document).keydown(function(event) 
-	{
-		if(event.which == 220)
-		{
-			toggleHidden();
-		}
-	});
+	// Backslash show output functionality
+	$(document).keydown(function(event) { if(event.which == 220) { toggleHidden(); } });
 
-	function toggleHidden()
-	{
-		if(hideOutput == 1)
-		{
-			$("#txtarea").show();
-			hideOutput = 0;
-		}
-		else
-		{
-			$("#txtarea").hide();
-			hideOutput = 1;
-		}
+	function toggleHidden(){
+		if(hideOutput == 1) { $("#outputBox").show(); hideOutput = 0; }
+		else { $("#outputBox").hide(); hideOutput = 1; }
 	}
 
-	function initiate()
-	{
+	function byID(id) { return document.getElementById(id); }
+
+	// Start up
+	function initiate(){
+		// Hide Everything
 		$("#connect").hide();
 		$("#game").hide();
 		$("#finish").hide();
-		var subject_id = window.prompt("Enter Participant ID");
-		condition = subject_id % 3;
-		output = document.getElementById("txtarea");
-		output.innerHTML = condition + "," + subject_id;
-		if(condition == 0)
-		{
-			output.innerHTML = "3," + subject_id;
+
+		// Get subid
+		var condition = NaN
+		while(condition == NaN) {
+			var subject_id = window.prompt("Enter a Valid Participant ID");
+			condition = (subject_id % 3) + 1;
 		}
-		$("#txtarea").hide();
+
+		output = byID("outputBox")
+		output.innerHTML = "Cond:" + condition + ", ID:" + subject_id;
+
+		$("#outputBox").hide();
 	}
 
-	function start_game()
-	{
+	function start_game(){
 		$("#instructions").hide();
 		$("#connect").show();
-		setTimeout(function(){ document.getElementById("p1_connect").innerHTML = "Player 1 - Connected"}, p1_connect_time);
-		setTimeout(function(){ document.getElementById("p3_connect").innerHTML = "Player 3 - Connected"}, p3_connect_time);
+		setTimeout(function(){ byID("p1_connect").innerHTML = "Player 1 - Connected"}, p1_connect_time);
+		setTimeout(function(){ byID("p3_connect").innerHTML = "Player 3 - Connected"}, p3_connect_time);
 		setTimeout(function(){ $("#game").show(); $("#connect").hide(); }, game_start_time);
 	}
 
-	function turn_advance()
-	{
+	function turn_advance(){
 		if(p4_lock == 1 && (p1_lock * p2_lock * p3_lock == 0))
 		{
 			alert("You Have Already Gone This Round! ");
-			document.getElementById("player_take").value = "";
+			byID("player_take").value = "";
 			return;
 		}
-		p4_take = parseInt(document.getElementById("player_take").value);
+		p4_take = parseInt(byID("player_take").value);
 		if(isNaN(p4_take))
 		{
 			alert("Please enter a number! ");
-			document.getElementById("player_take").value = "";
+			byID("player_take").value = "";
 			return;
 		}
 		if(p4_take < 0)
 		{
 			alert("Please enter a number greater than 0! ");
-			document.getElementById("player_take").value = "";
+			byID("player_take").value = "";
 			return;
 		}
 		if(p4_take > 1200)
 		{
 			alert("Please enter a number smaller than or equal to 1200! ");
-			document.getElementById("player_take").value = "";
+			byID("player_take").value = "";
 			return;
 		}
 		if(p4_lock == 0 && (p1_lock * p2_lock * p3_lock == 0))
@@ -263,7 +224,7 @@ Final score: 0
 			logData = output.value;
 			logData +=  "," + p4_take;
 			output.innerHTML = logData;
-			document.getElementById("player_take").value = "";
+			byID("player_take").value = "";
 			refresh_p4();
 			computerTurn();
 			return;
@@ -276,15 +237,14 @@ Final score: 0
 			logData = output.value;
 			logData +=  "," + p4_take;
 			output.innerHTML = logData;
-			document.getElementById("player_take").value = "";
+			byID("player_take").value = "";
 			refresh_p4();
 			roundAdvance();
 			return;
 		}*/
 	}
 
-	function computerTurn()
-	{
+	function computerTurn(){
 		var center = Math.floor(Math.random() * bot_turn_rand_time) + bot_turn_base_time;
 		var offset = Math.floor(Math.random() * bot_turn_offset_rand) + bot_turn_offset_base;
 		var turn_time = [center, (center + offset), (center - offset)];
@@ -294,8 +254,7 @@ Final score: 0
 		setTimeout(p3_turn, turn_time[2]);
 	}
 
-	function shuffle(a)
-	{ 
+	function shuffle(a){ 
 		var j, x, i; 
 		for (i = a.length; i; i--) 
 		{ 
@@ -306,8 +265,7 @@ Final score: 0
 		} 
 	}
 
-	function roundAdvance()
-	{
+	function roundAdvance(){
 		pot_total = Math.ceil(pot_total * 1.1);
 		if(pot_total > 20000)
 		{
@@ -318,12 +276,12 @@ Final score: 0
 		p2_lock = 0;
 		p3_lock = 0;
 		p4_lock = 0;
-		document.getElementById("round_text").innerHTML = "Round " + round;
-		document.getElementById("pot_text").innerHTML = "Total Fish = " + pot_total;
+		byID("round_text").innerHTML = "Round " + round;
+		byID("pot_text").innerHTML = "Total Fish = " + pot_total;
 		if(round == 7)
 		{
 			$("#game").hide();
-			document.getElementById("finish_total").innerHTML = "Final score: " + p4_total;
+			byID("finish_total").innerHTML = "Final score: " + p4_total;
 			$("#finish").show();
 
 			// Upload results
@@ -334,164 +292,116 @@ Final score: 0
 			      'Content-type': 'application/json',
 			    },
 			    body: JSON.stringify({
-			    		'conditionAndId': document.getElementById("txtarea").innerHTML, 
+			    		'conditionAndId': byID("outputBox").innerHTML, 
 			    		'finalResult': p4_total,
 			    }),
 			}).then(response => response.json()).then(json => console.log(json))
-
 			return;
 		}
 	}
 
-	function p1_turn()
-	{
-		if(condition == 0)
-		{
-			p1_take = p1_moves[(round - 1)];
-		}
-		if(condition == 1)
-		{
-			p1_take = p1_moves[(6 + (round - 1))];
-		}
-		if(condition == 2)
-		{
-			p1_take = p1_moves[(12 + (round - 1))];
-		}
+	function p1_turn() {
+		if(condition == 0) { p1_take = p1_moves[(round - 1)]; }
+		if(condition == 1) { p1_take = p1_moves[(6 + (round - 1))]; }
+		if(condition == 2) { p1_take = p1_moves[(12 + (round - 1))]; }
 		pot_total -= p1_take;
 		p1_total += p1_take;
 		refresh_p1();
 		p1_lock = 1;
-		if(p2_lock * p3_lock * p4_lock == 1)
-		{
-			roundAdvance();
-		}
+		if(p2_lock * p3_lock * p4_lock == 1) { roundAdvance(); }
 	}
 
-	function p2_turn()
-	{
-		if(condition == 0)
-		{
-			p2_take = p2_moves[(round - 1)];
-		}
-		if(condition == 1)
-		{
-			p2_take = p2_moves[(6 + (round - 1))];
-		}
-		if(condition == 2)
-		{
-			p2_take = p2_moves[(12 + (round - 1))];
-		}
+	function p2_turn() {
+		if(condition == 0) { p2_take = p2_moves[(round - 1)]; }
+		if(condition == 1) { p2_take = p2_moves[(6 + (round - 1))]; }
+		if(condition == 2) { p2_take = p2_moves[(12 + (round - 1))]; }
 		pot_total -= p2_take;
 		p2_total += p2_take;
 		refresh_p2();
 		p2_lock = 1;
-		if(p1_lock * p3_lock * p4_lock == 1)
-		{
-			roundAdvance();
-		}
+		if(p1_lock * p3_lock * p4_lock == 1) { roundAdvance(); }
 	}
 
-	function p3_turn()
-	{
+	function p3_turn() {
 		if(condition == 0)
-		{
-			p3_take = p3_moves[(round - 1)];
-		}
+		{ p3_take = p3_moves[(round - 1)]; }
 		if(condition == 1)
-		{
-			p3_take = p3_moves[(6 + (round - 1))];
-		}
+		{ p3_take = p3_moves[(6 + (round - 1))]; }
 		if(condition == 2)
-		{
-			p3_take = p3_moves[(12 + (round - 1))];
-		}
+		{ p3_take = p3_moves[(12 + (round - 1))]; }
 		pot_total -= p3_take;
 		p3_total += p3_take;
 		refresh_p3();
 		p3_lock = 1;
-		if(p1_lock * p2_lock * p4_lock == 1)
-		{
-			roundAdvance();
-		}
+		if(p1_lock * p2_lock * p4_lock == 1) { roundAdvance(); }
 	}
 
-	function clearOther()
-	{
+	function clearOther() {
 		clear_p1();
 		clear_p2();
 		clear_p3();
 	}
 
-	function clearUI()
-	{
+	function clearUI() {
 		clear_p1();
 		clear_p2();
 		clear_p3();
 		clear_p4();
 	}
 
-	function refreshUI()
-	{
+	function refreshUI() {
 		refresh_p1();
 		refresh_p2();
 		refresh_p3();
 		refresh_p4();
 	}
 
-	function refresh_p1()
-	{
-		document.getElementById("p1").innerHTML = "Player 1 Take For Round " + round + ": " + p1_take;
-		document.getElementById("pot_text").innerHTML = "Total Fish = " + pot_total;
-		document.getElementById("p1_text").innerHTML = "Player 1 Total: " + p1_total;
+	function refresh_p1() {
+		byID("p1").innerHTML = "Player 1 Take For Round " + round + ": " + p1_take;
+		byID("pot_text").innerHTML = "Total Fish = " + pot_total;
+		byID("p1_text").innerHTML = "Player 1 Total: " + p1_total;
 	}
 
-	function refresh_p2()
-	{
-		document.getElementById("p2").innerHTML = "Player 2 Take For Round " + round + ": " + p2_take;
-		document.getElementById("pot_text").innerHTML = "Total Fish = " + pot_total;
-		document.getElementById("p2_text").innerHTML = "Player 2 Total: " + p2_total;
+	function refresh_p2() {
+		byID("p2").innerHTML = "Player 2 Take For Round " + round + ": " + p2_take;
+		byID("pot_text").innerHTML = "Total Fish = " + pot_total;
+		byID("p2_text").innerHTML = "Player 2 Total: " + p2_total;
 	}
 
-	function refresh_p3()
-	{
-		document.getElementById("p3").innerHTML = "Player 3 Take For Round " + round + ": " + p3_take;
-		document.getElementById("pot_text").innerHTML = "Total Fish = " + pot_total;
-		document.getElementById("p3_text").innerHTML = "Player 3 Total: " + p3_total;
+	function refresh_p3() {
+		byID("p3").innerHTML = "Player 3 Take For Round " + round + ": " + p3_take;
+		byID("pot_text").innerHTML = "Total Fish = " + pot_total;
+		byID("p3_text").innerHTML = "Player 3 Total: " + p3_total;
 	}
 
-	function refresh_p4()
-	{
-		document.getElementById("p4").innerHTML = "Player 4 (You) Take For Round " + round + ": " + p4_take;
-		document.getElementById("pot_text").innerHTML = "Total Fish = " + pot_total;
-		document.getElementById("player_text").innerHTML = "Player 4 (You) Total: " + p4_total;
+	function refresh_p4() {
+		byID("p4").innerHTML = "Player 4 (You) Take For Round " + round + ": " + p4_take;
+		byID("pot_text").innerHTML = "Total Fish = " + pot_total;
+		byID("player_text").innerHTML = "Player 4 (You) Total: " + p4_total;
 	}
 
-	function clear_p1()
-	{
-		document.getElementById("pot_text").innerHTML = "Total Fish =";
-		document.getElementById("p1").innerHTML = "Player 1 Take: ";
-		document.getElementById("p1_text").innerHTML = "Player 1 Total:";
+	function clear_p1() {
+		byID("pot_text").innerHTML = "Total Fish =";
+		byID("p1").innerHTML = "Player 1 Take: ";
+		byID("p1_text").innerHTML = "Player 1 Total:";
 	}
 
-	function clear_p2()
-	{
-		document.getElementById("pot_text").innerHTML = "Total Fish =";
-		document.getElementById("p2").innerHTML = "Player 2 Take: ";
-		document.getElementById("p2_text").innerHTML = "Player 2 Total:";
+	function clear_p2(){
+		byID("pot_text").innerHTML = "Total Fish =";
+		byID("p2").innerHTML = "Player 2 Take: ";
+		byID("p2_text").innerHTML = "Player 2 Total:";
 	}
 
-	function clear_p3()
-	{
-		document.getElementById("pot_text").innerHTML = "Total Fish =";
-		document.getElementById("p3").innerHTML = "Player 3 Take: ";
-		document.getElementById("p3_text").innerHTML = "Player 3 Total:";
+	function clear_p3(){
+		byID("pot_text").innerHTML = "Total Fish =";
+		byID("p3").innerHTML = "Player 3 Take: ";
+		byID("p3_text").innerHTML = "Player 3 Total:";
 	}
 
-	function clear_p4()
-	{
-		document.getElementById("player_text").innerHTML = "Player Total:";
-		document.getElementById("p4").innerHTML = "Player 4 (You) Take: ";
-		document.getElementById("player_text").innerHTML = "Player 4 (You) Total: ";
+	function clear_p4(){
+		byID("player_text").innerHTML = "Player Total:";
+		byID("p4").innerHTML = "Player 4 (You) Take: ";
+		byID("player_text").innerHTML = "Player 4 (You) Total: ";
 	}
 
 	$(window).on('beforeunload', function() { return 'Save Data Before Exiting!'; });
