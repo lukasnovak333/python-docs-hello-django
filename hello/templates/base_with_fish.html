@@ -203,7 +203,7 @@ function hide(id) { $(id).css('display', 'none') }
 
 function show(id) { $(id).css('display', 'block') }
 
-function isHidden(id) { return( ($(id).css('display') == 'none') }
+function isHidden(id) { return ($(id).css('display') == 'none') }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -299,6 +299,7 @@ function roundAdvance(){
 	p4_lock = 0;
 	getByID("round_text").innerHTML = "Round " + round;
 	getByID("pot_text").innerHTML = "Total Fish = " + pot_total;
+
 	if(round == 7){
 		hide("#game")
 		getByID("finish_total").innerHTML = "Final score: " + p4_total;
