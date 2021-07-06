@@ -184,7 +184,7 @@ Thank you for playing!
 
 
 var output;
-var resultsJSON = {};
+var resultsJSON = {'surveyResults': [],};
 var condition = NaN;
 var p1_lock = 0;
 var p2_lock = 0;
@@ -422,10 +422,16 @@ function populateSurveyItem(index) {
 function iterate_survey_item() {
 	// Check survey is filled out
 	let checked = false
+	let value = NaN;
+
 	for(let i = 1; i <= 4; i++) {
 		let radioID = "#radio-" + i;
 		let input = getByID(radioID)
-		if(input.checked) checked = true
+		if(input.checked) {
+			checked = true;
+			value = input.value;
+			break;
+		} 
 	}
 
 	if(checked == false) {
@@ -434,6 +440,12 @@ function iterate_survey_item() {
 	}
 
 	// Proceed
+	resultsJSON['surveyResults'].push({
+		'item': survey_item_index,
+		'question': getByID('#survey_question').innerHTML,
+		'response': value
+	})
+	
 	survey_item_index++;
 	populateSurveyItem(survey_item_index);
 }
