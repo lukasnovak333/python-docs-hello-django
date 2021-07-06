@@ -275,7 +275,8 @@ function turn_advance(){
 		p4_total += p4_take;
 		pot_total -= p4_take;
 		logData = output.value;
-		logData +=  ", R" + round + ": " p4_take;
+		additionalData = ", R" + round + ": " p4_take;
+		logData +=  additionalData;
 		output.innerHTML = logData;
 		getByID("player_take").value = "";
 		refresh_p4();
@@ -364,26 +365,6 @@ function p3_turn() {
 	if(p1_lock * p2_lock * p4_lock == 1) { roundAdvance(); }
 }
 
-function clearOther() {
-	clear_p1();
-	clear_p2();
-	clear_p3();
-}
-
-function clearUI() {
-	clear_p1();
-	clear_p2();
-	clear_p3();
-	clear_p4();
-}
-
-function refreshUI() {
-	refresh_p1();
-	refresh_p2();
-	refresh_p3();
-	refresh_p4();
-}
-
 function refresh_p1() {
 	getByID("p1").innerHTML = "Player 1 Took For Round " + round + ": " + p1_take;
 	getByID("pot_text").innerHTML = "Total Fish = " + pot_total;
@@ -406,30 +387,6 @@ function refresh_p4() {
 	getByID("p4").innerHTML = "Player 4 (You) Took For Round " + round + ": " + p4_take;
 	getByID("pot_text").innerHTML = "Total Fish = " + pot_total;
 	getByID("player_text").innerHTML = "Player 4 (You) Total: " + p4_total;
-}
-
-function clear_p1() {
-	getByID("pot_text").innerHTML = "Total Fish =";
-	getByID("p1").innerHTML = "Player 1 Take: ";
-	getByID("p1_text").innerHTML = "Player 1 Total:";
-}
-
-function clear_p2(){
-	getByID("pot_text").innerHTML = "Total Fish =";
-	getByID("p2").innerHTML = "Player 2 Take: ";
-	getByID("p2_text").innerHTML = "Player 2 Total:";
-}
-
-function clear_p3(){
-	getByID("pot_text").innerHTML = "Total Fish =";
-	getByID("p3").innerHTML = "Player 3 Take: ";
-	getByID("p3_text").innerHTML = "Player 3 Total:";
-}
-
-function clear_p4(){
-	getByID("player_text").innerHTML = "Player Total:";
-	getByID("p4").innerHTML = "Player 4 (You) Take: ";
-	getByID("player_text").innerHTML = "Player 4 (You) Total: ";
 }
 
 $(window).on('beforeunload', function() { return 'Save Data Before Exiting!'; });
