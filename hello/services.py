@@ -24,7 +24,6 @@ from django.views.decorators.csrf import csrf_exempt
 # @require_http_methods(["POST"])
 def single_service(request):
 	try:
-
 		body_unicode = request.body.decode('utf-8')
 		content = json.loads(body_unicode)
 
@@ -38,11 +37,10 @@ def single_service(request):
 
 
 		f= open("/home/site/textFiles/db.txt","a+")
-		f.write('----------------')
-		f.write('' + time.ctime(time.time()))
-		f.write('\n')
+		f.write('---------------\n')
+		f.write(time.ctime(time.time()) + '\n')
 		f.write(json.dumps(resultsObj, indent=4))
-		f.write('----------------')
+		f.write('\n----------------')
 		f.close()
 		return JsonResponse({'success': "true"})
 
