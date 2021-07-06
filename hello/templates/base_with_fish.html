@@ -12,11 +12,9 @@
 			background: lightcyan;
 		}
 
-		#game {
-			align-content: center;
-		}
+	
 
-		p {
+		p, pre {
 			font-weight: 500;
 			font-size: 120%;
 			font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
@@ -24,19 +22,17 @@
 
 		p.scorebox{
 			border-style: solid;
-			width: 250px
+			font-size: 2em;
 		}
 
-		p#round_text {
+		#round_text {
 			font-size: 200%;
+			text-align: center;
 		}
 
-		pre{
-			font-weight: 500;
-			font-size: 120%;
-			font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+		#game_board {
+			text-align: center;
 		}
-
 		</style>
 {% endblock styles %}
 </head>
@@ -78,7 +74,7 @@ But if you take more fish, you will make more money.
 
 You will see how your total adds up over the “years” (turns) you will play the game. 
 
-You will play up to 15 “years”. 
+You will play up to 15 “years”. You will see how much other players take per year after you choose how many you will take. 
 
 At the end of the experiment, all of the people who have played this game 
 will be entered into a lottery for an Amazon gift card worth $100. One out of ten players will win a gift card.
