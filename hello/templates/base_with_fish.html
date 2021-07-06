@@ -164,13 +164,19 @@ Each fish you catch gives you 1 chance in the lottery.
 </div>
 <!--------------------------------------------------------------------------------------------------------------------->
 
-<!--Finish Screen ----------------------------------------------------------------------------------------------------->
+<!--Finish Game Screen ----------------------------------------------------------------------------------------------------->
 <pre id="finish" style="display: none;">
 Thank you for playing! 
 6 rounds provided all the information that we need, so we will end the game now. 
-<strong>Please return to the survey administrator.</strong>
+Are you ready to take our survey?
 <pre id="finish_total"> Final score: 0 </pre>
 <input type="button" id="admin-surveys" onclick="administer_surveys()" value="Proceed to Survey"/>
+</pre>
+<!--------------------------------------------------------------------------------------------------------------------->
+
+<!--True Finish Screen ----------------------------------------------------------------------------------------------------->
+<pre id="finish_survey" style="display: none;">
+Thank you for participating in our experiment!
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
 
@@ -365,28 +371,15 @@ function roundAdvance(){
 		getByID("finish_total").innerHTML = "Final score: " + p4_total;
 		show("#finish")
 		resultsJSON['total'] = p4_total;
-		uploadResults()
 		return;
 	}
 }
 
-// Uploads results to server where they are appended to text file
-function uploadResults() {
-			// Upload results
-		fetch('/services/postTestResult', {
-			method: 'POST',
-			headers: {
-		      'Accept': 'application/json',
-		      'Content-type': 'application/json',
-		    },
-		    body: JSON.stringify(resultsJSON),
-		}).then(response => response.json()).then(json => console.log(json))
-}
 
 function administer_surveys() {
 	hide("#finish")
 	populateSurveyItem(survey_item_index)
-	show("#survey_form")
+	show("#survey_item")
 }
 
 function populateSurveyItem(index) {
@@ -451,11 +444,26 @@ function iterate_survey_item() {
 	survey_item_index++;
 
 	if(survey_item_index == survey_object.length) {
-		// Show true return and thank you page
+		hide("#survey_item");
+		show("#finish_survey");
+		uploadResults();
 		return;
 	}
 
 	populateSurveyItem(survey_item_index);
+}
+
+// Uploads results to server where they are appended to text file
+function uploadResults() {
+			// Upload results
+		fetch('/services/postTestResult', {
+			method: 'POST',
+			headers: {
+		      'Accept': 'application/json',
+		      'Content-type': 'application/json',
+		    },
+		    body: JSON.stringify(resultsJSON),
+		}).then(response => response.json()).then(json => console.log(json))
 }
 
 
