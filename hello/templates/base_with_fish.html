@@ -229,9 +229,11 @@ Are you ready to take our survey?
 
 <!--Pre-Debrief ----------------------------------------------------------------------------------------------------->
 <pre id="demographics" style="display: none;">
-Thank you for participating in the study. There is just one last part that we need to do. It is called debriefing. 
-We just need to ask you a few questions about our study. If you don’t have an answer, it’s fine to say, ‘I don’t know.’
-<input type="button" id="go-to-debrief" onclick="goToSurvey()" value="Proceed to Questionnaire"/>
+Demographics Questions
+
+Please provide a response for each of the following questions. 
+
+<input type="button" id="go-to-survey" onclick="administerSurvey()" value="Proceed to Questionnaire"/>
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
 
@@ -535,8 +537,15 @@ function roundAdvance(){
 }
 
 
-function administer_surveys() {
+function administerDemographics() {
 	hide("#finish")
+	show("#demographics")
+}
+
+function administerSurvey() {
+	// Include check to see if demographics is complete
+	// populate resultsJSON with results
+	hide("#demographics")
 	populateSurveyItem(survey_item_index)
 	show("#survey_item")
 }
