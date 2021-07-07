@@ -606,8 +606,10 @@ function populateSurveyItem(index) {
 		let question = questionObj['question']
 		let responses = questionObj['responses']
 		let listOfResponseObjects = getListOfResponseObjects(responses);
+
 		getByID('survey_question').innerHTML = question
-		for(let i = 0; i < responses.length; i++){
+		
+		for(let i = 0; i < listOfResponseObjects.length; i++){
 			let radioKey = (i + 1);
 			let radioID = "radio-" + radioKey;
 			let labelID = "radio-" + radioKey + "-label";
@@ -621,8 +623,8 @@ function populateSurveyItem(index) {
 			showInlineBlock("#" + labelID);
 		}
 
-		if(responses.length < NUM_RADIO_ITEMS) {
-			for(let i = NUM_RADIO_ITEMS; i > responses.length; i--) {
+		if(listOfResponseObjects.length < NUM_RADIO_ITEMS) {
+			for(let i = NUM_RADIO_ITEMS; i > listOfResponseObjects.length; i--) {
 				let radioID = "radio-" + i;
 				let labelID = "radio-" + i + "-label";
 				getByID(radioID).checked = false;
