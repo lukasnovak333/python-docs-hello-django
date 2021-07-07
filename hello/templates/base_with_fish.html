@@ -575,8 +575,10 @@ function administerDemographics() {
 function administerSurvey() {
 	// Include check to see if demographics is complete
 	let completed = false;
+	let races = [] ;
+
 	while(!completed){
-		let races = []
+		races = [];
 		for(let i = 1; i <= 6; i++) {
 			let radioID = "weirddemo-" + i
 			let labelID = radioID + "-label"
