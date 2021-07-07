@@ -574,6 +574,29 @@ function administerDemographics() {
 
 function administerSurvey() {
 	// Include check to see if demographics is complete
+	let completed = false;
+	while(!completed){
+		let races = []
+		for(let i = 1; i <= 6; i++) {
+			let radioID = "weirddemo-" + i
+			let labelID = radioID + "-label"
+			let input = getByID(radioID)
+			let labelObj = getByID(labelID)
+
+			if(input.checked) {
+				races.push(labelObj.innerHTML)
+			}
+		}
+
+		if(races.length > 0) completed = true
+		else {
+			window.prompt("Please answer the question.")
+			return;
+		}
+	}
+
+	resultsJSON['races'] = races
+
 	// populate resultsJSON with results
 	hide("#weird-demographics")
 	populateSurveyItem()
