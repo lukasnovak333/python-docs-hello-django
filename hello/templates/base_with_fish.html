@@ -521,9 +521,9 @@ function goToFinalDebriefForm() {
 
 	hide("#debrief-funnel");
 
-	let answerOne = getByID("purposeBox").innerHTML;
-	let answerTwo = getByID("purposeBox-2").innerHTML;
-	let answerThree = getByID("purposeBox-3").innerHTML;
+	let answerOne = getByID("purposeBox").value;
+	let answerTwo = getByID("purposeBox-2").value;
+	let answerThree = getByID("purposeBox-3").value;
 
 	let answerObj = { 'answerOne': answerOne,
 		'answerTwo': answerTwo,
