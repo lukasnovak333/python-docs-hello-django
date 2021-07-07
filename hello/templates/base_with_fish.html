@@ -228,12 +228,25 @@ Are you ready to take our survey?
 <!--------------------------------------------------------------------------------------------------------------------->
 
 <!--Pre-Debrief ----------------------------------------------------------------------------------------------------->
-<pre id="demographics" style="display: none;">
+<pre id="weird-demographics" style="display: none;">
 Demographics Questions
 
 Please provide a response for each of the following questions. 
-
-<input type="button" id="go-to-survey" onclick="administerSurvey()" value="Proceed to Questionnaire"/>
+<form id='demo-form'>
+		<input type="checkbox" id="weirddemo-1"  name="weirddemo-1" value="African American or Black">
+		<label id="weirddemo-1-label" for="weirddemo-1"> Value1 </label><br/>
+		<input type="checkbox" id="weirddemo-2"  name="weirddemo-2" value="American Indian or Alaska Native">
+		<label id="weirddemo-2-label" for="weirddemo-2"> Value2 </label><br/>
+		<input type="checkbox" id="weirddemo-3"  name="weirddemo-3" value="Asian">
+		<label id="weirddemo-3-label" for="weirddemo-3"> Value3 </label><br/>
+		<input type="checkbox" id="weirddemo-4"  name="weirddemo-4" value="Native Hawaiian or Pacific Islander">
+		<label id="weirddemo-4-label" for="weirddemo-4"> Native Hawaiian or Pacific Islander </label><br/>
+		<input type="checkbox" id="weirddemo-5"  name="weirddemo-5" value="White">
+		<label id="weirddemo-5-label" for="weirddemo-5"> White </label><br/>
+		<input type="checkbox" id="weirddemo-6"  name="weirddemo-6" value="Other">
+		<label id="weirddemo-6-label" for="weirddemo-6"> Other </label><br/>
+	</form>
+<input type="button" id="go-to-survey" onclick="checkWeirdDemo()" value="Proceed to Questionnaire"/>
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
 
@@ -241,7 +254,7 @@ Please provide a response for each of the following questions.
 <pre id="finish_survey" style="display: none;">
 Thank you for participating in the study. There is just one last part that we need to do. It is called debriefing. 
 We just need to ask you a few questions about our study. If you don’t have an answer, it’s fine to say, ‘I don’t know.’
-<input type="button" id="go-to-debrief" onclick="goToDebrief()" value="Proceed to Questionnaire"/>
+<input type="button" id="go-to-debrief" onclick="goToDebrief()" value="Proceed to Questions"/>
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
 
@@ -379,6 +392,7 @@ var bot_turn_offset_base = 500;
 
 var NUM_ROUNDS = 2;
 var NUM_RADIO_ITEMS = 8;
+var NUM_DEMO_ITEMS = 9;
 
 var elements = ["#outputBox", "#connect", "#instructions", "#game", "#finish", "#consent_form", "#failure_case", "#survey_item"]
 
@@ -536,17 +550,35 @@ function roundAdvance(){
 	}
 }
 
+function checkWeirdDemo() {
+	// Verify that things are in fact checked
+	// Save the results
+	administerSurvey()
+}
 
 function administerDemographics() {
 	hide("#finish")
-	show("#demographics")
+
+	let ageCheck = NaN
+	// Get subid
+	while(isNaN(ageCheck)) {
+		var age = window.prompt("Enter your age");
+		ageCheck = (age % 3);
+	}
+
+	resultsJSON['age'] = age
+
+	// Show weird questions first
+	show("#weird-demographics")
 }
 
 function administerSurvey() {
 	// Include check to see if demographics is complete
 	// populate resultsJSON with results
-	hide("#demographics")
-	populateSurveyItem(survey_item_index)
+	hide("#weird-demographics")
+	let relQuestionIndex = random_survey_indices[survey_item_index]
+	let initialQuestionObj = survey_object[relQuestionIndex]
+	populateSurveyItem(initialQuestionObj)
 	show("#survey_item")
 }
 
@@ -599,10 +631,7 @@ function getListOfResponseObjects(responses) {
 }
 
 
-function populateSurveyItem(index) {
-		let relQuestionIndex = random_survey_indices[index]
-		let questionObj = survey_object[relQuestionIndex]
-
+function populateSurveyItem(questionObj) {
 		let question = questionObj['question']
 		let responses = questionObj['responses']
 		let listOfResponseObjects = getListOfResponseObjects(responses);
@@ -638,13 +667,17 @@ function iterate_survey_item() {
 	// Check survey is filled out
 	let checked = false;
 	let value = NaN;
+	let label = NaN;
 
 	for(let i = 1; i <= NUM_RADIO_ITEMS; i++) {
 		let radioID = "radio-" + i;
+		let labelID = radioID + '-label'
 		let input = getByID(radioID);
+		let label = getByID(labelID);
 		if(input.checked) {
 			checked = true;
 			value = input.value;
+			label = label.innerHTML;
 			break;
 		} 
 	}
@@ -658,7 +691,8 @@ function iterate_survey_item() {
 	resultsJSON['surveyResults'].push({
 		'item': survey_item_index,
 		'question': getByID('survey_question').innerHTML,
-		'response': value
+		'responseCode': value,
+		'responseText': label,
 	});
 
 	survey_item_index++;
@@ -753,7 +787,101 @@ function randomSurveyOrder() {
 	return base
 }
 
+// PUT DEMO ITEMS FIRST
 var survey_object = [
+{
+	'question-id': 'demo-1',
+	'question': "What is your gender?",
+	'responses': {
+		"Female": 0,
+		"Male": 1,
+		"Other": 2
+	}
+},
+{
+	'question-id': 'demo-2',
+	'question': "Which best describes your ethnicity? (Select one)",
+	'responses': {
+		"Hispanic or Latino": 0,
+		"Not Hispanic or Not Latino": 1,
+	}	
+},
+{
+	'question-id': 'demo-3',
+	'question': "What is your marital status? (Select one)",
+	'responses': {
+		"Single": 0,
+		"Married, or in a domestic partnership": 1,
+		"Separated": 2,
+		"Divorced": 3,
+		"Widowed": 4,
+	}
+},
+{
+	'question-id': 'demo-4',
+	'question': "Do you consider yourself to be:",
+	'responses': {
+		"Heterosexual or straight": 0,
+		"Gay or lesbian": 1,
+		"Bisexual": 2,
+		"Other (e.g. Pansexual, Asexual)": 3,
+	}
+},
+{
+	'question-id': 'demo-5',
+	'question': "What is the highest degree or level of school you have completed? (Please select one)",
+	'responses': {
+		"Less than a highschool diploma": 0,
+		"High school degree or equivalent (e.g. GED)": 1,
+		"Some college, no degree": 2,
+		"Associates degree (e.g. AA, AS)": 3,
+		"Bachelor's degree (e.g. BA, BA)": 4,
+		"Graduate degree (e.g. MA, MS, PhD, MD)": 5
+	}
+},
+{
+	'question-id': 'demo-6',
+	'question': "What is your annual income (or combined annual income if you have a spouse)? (Please select one)",
+	'responses': {
+		"Less than $20,000": 0,
+		"$20,000 to $34,999": 1,
+		"$35,000 to $49,999": 2,
+		"$50,000 to $74,999": 3,
+		"$75,000 to $99,999": 4, 
+		"Over $100,000": 5,
+	}
+},
+{
+	'question-id': 'demo-7',
+	'question': "What is your current employment status? (Please select one)",
+	'responses': {
+		"Employed full time (40 or more hours per week)": 0,
+		"Employed part time (up to 39 hours per week)": 1,
+		"Unemployed and currently looking for work": 2,
+		"Unemployed and not currently looking for work": 3,
+		"Retired": 4, 
+		"Student": 5,
+	}
+},
+{
+	'question-id': 'demo-8',
+	'question': "Which region of the country do you live in? (Please select one)",
+	'responses': {
+		"Midwest": 0,
+		"Northeast": 1,
+		"Northwest": 2,
+		"Southeast": 3,
+		"Southwest": 4, 
+	}
+},
+{
+	'question-id': 'demo-9',
+	'question': "Is English your native language?",
+	'responses': {
+		"Yes": 1,
+		"No": 0,
+	}
+},
 {
 	'question-id': 1,
 	'question': "How many eggs would you like?",
@@ -775,9 +903,7 @@ var survey_object = [
 		"Strongly Agree": 5,
 	}
 },
-
 ]
-
 
 var random_survey_indices = randomSurveyOrder()
 var survey_item_index = 0
