@@ -672,11 +672,11 @@ function iterate_survey_item() {
 		let radioID = "radio-" + i;
 		let labelID = radioID + '-label'
 		let input = getByID(radioID);
-		let label = getByID(labelID);
+		let labelObj = getByID(labelID);
 		if(input.checked) {
 			checked = true;
 			value = input.value;
-			label = label.innerHTML;
+			label = labelObj.innerHTML;
 			break;
 		} 
 	}
