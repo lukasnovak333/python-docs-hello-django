@@ -520,7 +520,8 @@ function goToDebrief() {
 function goToFinalDebriefForm() {
 
 	hide("#debrief-funnel");
-
+	show("#debrief-form");
+	
 	let answerOne = getByID("purposeBox").value;
 	let answerTwo = getByID("purposeBox-2").value;
 	let answerThree = getByID("purposeBox-3").value;
@@ -531,9 +532,6 @@ function goToFinalDebriefForm() {
 	};
 
 	resultsJSON['debriefFunnel'] = answerObj;
-
-	show("#debrief-form");
-
 	uploadResults();
 }
 
