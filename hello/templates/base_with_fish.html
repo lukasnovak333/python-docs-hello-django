@@ -313,7 +313,7 @@ University of Miami Human Subjects Research Office at (305) 243-3195 or emailing
 
 ***Please keep a copy of this form or print this from your screen, for your future reference. Once again, 
 thank you for your participation in this study.***
-<a href="http://www.google.com/">
+<a href="https://app.prolific.co/submissions/complete?cc=4E152F17">
    <input type="button" value="Complete Participation in Study" />
 </a>
 </pre>
@@ -330,7 +330,7 @@ thank you for your participation in this study.***
 
 var output;
 var resultsJSON = {'surveyResults': [],};
-var condition = NaN;
+var condition = Math.floor(Math.random() * 3);
 var p1_lock = 0;
 var p2_lock = 0;
 var p3_lock = 0;
@@ -413,10 +413,11 @@ function initiate_experiment(){
 	// Hide Consent Form
 	hide("#consent_form");
 
+	let idCheck = NaN
 	// Get subid
-	while(isNaN(condition)) {
+	while(isNaN(idCheck)) {
 		var subject_id = window.prompt("Enter a Valid Prolific ID");
-		condition = (subject_id % 3);
+		idCheck = (subject_id % 3);
 	}
 
 	output = getByID("outputBox")
