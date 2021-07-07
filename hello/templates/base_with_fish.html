@@ -19,6 +19,10 @@
 		    margin: 10px;
 		    font-size: 1.5em;
 		}
+
+		input:hover {
+			background: grey;
+		}
 	
 
 		p, pre {
@@ -49,8 +53,8 @@
 			border: black solid;
 		}
 
-		#start_button {
-			font-size: 2em;
+		#player_take {
+			font-size: 1.5em;
 		}
 		</style>
 {% endblock styles %}
@@ -71,21 +75,36 @@
 
 <strong style="text-align: center;"> University of Miami </strong>
 
-CONSENT TO PARTICIPATE IN A RESEARCH STUDY: The following information describes the research study in which you are being asked to participate. Please read the information carefully. At the end, you will be asked to indicate your agreement to participate. We are asking you to participate in a research study to learn more about how personality and decision-making are related.
+CONSENT TO PARTICIPATE IN A RESEARCH STUDY: The following information describes the research study in which you are
+being asked to participate. Please read the information carefully. At the end, you will be asked to indicate your 
+agreement to participate. We are asking you to participate in a research study to learn more about how personality and decision-making are related.
 
-Participation in this study involves playing a decision-making game and completing several questionnaires about personal traits, which will take approximately forty minutes.
+Participation in this study involves playing a decision-making game and completing several questionnaires about personal 
+traits, which will take approximately forty minutes.
 
-We do not anticipate significant risks to you related to this study, but it is possible that some questions could be distressing. Your participation in this study is voluntary and you are free to leave the study at any time. If you decline to participate or stop participating in this study, there will be no negative consequences to you.
+We do not anticipate significant risks to you related to this study, but it is possible that some questions could be 
+distressing. Your participation in this study is voluntary and you are free to leave the study at any time. If you
+decline to participate or stop participating in this study, there will be no negative consequences to you.
 
-No direct benefits are expected for your participation. For completing this study, you will receive the amount previously specified by your research panel provider. There will also be an opportunity to earn some financial compensation based on your choices in the decision-making game.
+No direct benefits are expected for your participation. For completing this study, you will receive the amount
+previously specified by your research panel provider. There will also be an opportunity to earn some financial
+compensation based on your choices in the decision-making game.
 
-The investigator and his assistants will consider your records confidential to the extent permitted by law. The U. S. Department of Health and Human Services may request to review and obtain copies of your records. Your records may also be reviewed for audit purposes by authorized University employees or other agents who are bound by the same provisions of confidentiality. The information that you provide to us will not be linked to any identifying information at the University of Miami to help maintain confidentiality. The list containing your name will be retained only for the purposes of payment for your participation.
+The investigator and his assistants will consider your records confidential to the extent permitted by law. The U. S.
+Department of Health and Human Services may request to review and obtain copies of your records. Your records may also
+be reviewed for audit purposes by authorized University employees or other agents who are bound by the same provisions
+of confidentiality. The information that you provide to us will not be linked to any identifying information at the
+University of Miami to help maintain confidentiality. The list containing your name will be retained only for the 
+purposes of payment for your participation.
 
-You may ask and will receive answers to any questions while participating in this study as best we can. The investigator can send you a copy of this consent form by email if you request it. If you have any questions about your rights as a research participant, you may contact The Human Subjects Research Office at 305-243-3195 or at hsro@miami.edu.
+You may ask and will receive answers to any questions while participating in this study as best we can. The investigator
+can send you a copy of this consent form by email if you request it. If you have any questions about your rights as a
+research participant, you may contact The Human Subjects Research Office at 305-243-3195 or at hsro@miami.edu.
 
 PARTICIPANT AGREEMENT:
 
-By clicking on the “I Agree” button below, I acknowledge that I have read the information in this consent form and agree to participate in this study.
+By clicking on the “I Agree” button below, I acknowledge that I have read the information in this consent form
+and agree to participate in this study.
 <input id="consent_affirmative" type="button" onclick="initiate_experiment()" value="I agree">
 <input id="consent_negative" type="button" onclick="fail_experiment()" value="I do not agree">
 </pre>
@@ -211,11 +230,11 @@ We just need to ask you a few questions about our study. If you don’t have an 
 <!--Debriefing ----------------------------------------------------------------------------------------------------->
 <pre id="debrief-funnel" style="display: none;">
 What do you think the purpose of the study was? (200 words or less)
-<textarea id="purposeBox" rows="22" cols="15" style="" readonly> </textarea>
+<textarea id="purposeBox" rows="22" cols="15" style="" > </textarea>
 If our avowed purpose was not the real purpose, what do you think the purpose is? 
-<textarea id="purposeBox-2" rows="22" cols="15" style="" readonly> </textarea>
+<textarea id="purposeBox-2" rows="22" cols="15" style=""> </textarea>
 Was there anything about the study that seemed suspicious? 
-<textarea id="purposeBox-3" rows="22" cols="15" style="" readonly> </textarea>
+<textarea id="purposeBox-3" rows="22" cols="15" style=""> </textarea>
 <input type="button" id="go-to-debrief" onclick="goToFinalDebriefForm()" value="Proceed to Debriefing"/>
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
@@ -230,33 +249,62 @@ Principal Investigator: Blaine Fowers
 
 Study Number: 20210309
 
-Thank you for your participation in our study. We appreciate your participation. This form provides more information about the study purpose and procedures that we did not fully disclose during the consent process.
+Thank you for your participation in our study. We appreciate your participation. This form provides more information 
+about the study purpose and procedures that we did not fully disclose during the consent process.
 
 Study Purpose and Procedures:
 
-When you agreed to take part in the study, we informed you that the study was about learning more about how personality and decision-making are related. Your participation in this study was described as involving playing a decision-making game and completing several questionnaires about personal traits. In fact, the true purpose of the study was to assess the relationship between self-reported trait fairness and the degree of fairness behavior participants demonstrated in the economic game in the study. There were two deceptions in the study. First, you were told that you were interacting with 3 other people in the study, but you were playing with 1 of 3 pre-designed computer protocols. You were randomly assigned to one of the three conditions in the study, and we were interested in how these conditions affect participants’ decisions. Second, you were told that your chances to win the $100 lottery would be proportional to the number of fish you took in the game. However, all participants will have an equal chance of winning the lottery. The idea that there would be unequal chances to win the lottery was designed as an incentive to encourage participants to act selfishly. We hope to identify whether self-reported trait fairness has meaningful relationships with observed fairness behavior, which will give us more confidence in that self-report measurement and improve our understanding of fairness.
+When you agreed to take part in the study, we informed you that the study was about learning more about how personality
+and decision-making are related. Your participation in this study was described as involving playing a decision-making 
+game and completing several questionnaires about personal traits. In fact, the true purpose of the study was to assess 
+the relationship between self-reported trait fairness and the degree of fairness behavior participants demonstrated in 
+the economic game in the study. There were two deceptions in the study. First, you were told that you were interacting 
+with 3 other people in the study, but you were playing with 1 of 3 pre-designed computer protocols. You were randomly 
+assigned to one of the three conditions in the study, and we were interested in how these conditions affect 
+participants’ decisions. Second, you were told that your chances to win the $100 lottery would be proportional 
+to the number of fish you took in the game. However, all participants will have an equal chance of winning the 
+lottery. The idea that there would be unequal chances to win the lottery was designed as an incentive to encourage 
+participants to act selfishly. We hope to identify whether self-reported trait fairness has meaningful relationships 
+with observed fairness behavior, which will give us more confidence in that self-report measurement and improve 
+our understanding of fairness.
 
-To properly test our theories, we could not give you all these details before you took part. Withholding the details allows us to make sure your reactions in this study were real and not shaped by knowing about the study ahead of time. Once again, we offered a benign cover story that you were playing with other people in the game and that your chances of winning the lottery would be increased by your fish taking behavior. Both these descriptions were deceptions designed to prevent participants from acting more fairly due to knowing that we were interested in fairness. We hope you understand the reason for our use of deception.
+To properly test our theories, we could not give you all these details before you took part. Withholding the 
+details allows us to make sure your reactions in this study were real and not shaped by knowing about the study 
+ahead of time. Once again, we offered a benign cover story that you were playing with other people in the game 
+and that your chances of winning the lottery would be increased by your fish taking behavior. Both these 
+descriptions were deceptions designed to prevent participants from acting more fairly due to knowing that 
+we were interested in fairness. We hope you understand the reason for our use of deception.
 
 Your Right to Withdraw Data:
 
 Now that you know the true purpose of this research study, you may decide whether you want
 
-to allow the data about you to remain in the study. If you choose to have your data removed, you can have all your data from the study removed. Please email the principal investigator, Blaine Fowers (bfowers@miami.edu), and ask to have your data removed. Nothing bad will happen if you decide to have your data removed. Even if you ask to have your data removed from the study, you are still entitled to receive the payment we agreed to provide through your research panel provider. Before making your decision, you can email the principal investigator to have your questions answered.
+to allow the data about you to remain in the study. If you choose to have your data removed, you can have all 
+your data from the study removed. Please email the principal investigator, Blaine Fowers (bfowers@miami.edu), 
+and ask to have your data removed. Nothing bad will happen if you decide to have your data removed. Even if 
+you ask to have your data removed from the study, you are still entitled to receive the payment we agreed to
+provide through your research panel provider. Before making your decision, you can email the principal 
+investigator to have your questions answered.
 
 Confidentiality:
 
-Please note that although the description of the study’s purpose and procedures are different from what you were told, everything else in the consent form is correct, including information about keeping your data provide. Your data will remain anonymous because it will not have any identifying information attached.
+Please note that although the description of the study’s purpose and procedures are different from what you were 
+told, everything else in the consent form is correct, including information about keeping your data provide. 
+Your data will remain anonymous because it will not have any identifying information attached.
 
-Please do not disclose research procedures and/or hypotheses to anyone who might participate in this study in the future. Telling them could affect the results of the study.
+Please do not disclose research procedures and/or hypotheses to anyone who might participate in this study in 
+the future. Telling them could affect the results of the study.
 
 Contact Information:
 
-If you have any questions or concerns about this study, its purpose or procedures, or if you have a research-related problem, please feel free to contact the Principal Investigator, Blaine Fowers (bfowers@miami.edu).
+If you have any questions or concerns about this study, its purpose or procedures, or if you have a 
+research-related problem, please feel free to contact the Principal Investigator, Blaine Fowers (bfowers@miami.edu).
 
-If you have any questions concerning your rights as a research participant, you may contact the University of Miami Human Subjects Research Office at (305) 243-3195 or emailing hsro@med.miami.edu.
+If you have any questions concerning your rights as a research participant, you may contact the 
+University of Miami Human Subjects Research Office at (305) 243-3195 or emailing hsro@med.miami.edu.
 
-***Please keep a copy of this form or print this from your screen, for your future reference. Once again, thank you for your participation in this study.***
+***Please keep a copy of this form or print this from your screen, for your future reference. Once again, 
+thank you for your participation in this study.***
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
 
