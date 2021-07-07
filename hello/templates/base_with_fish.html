@@ -567,12 +567,28 @@ function goToFinalDebriefForm() {
 	uploadResults();
 }
 
+// Returns like: [('yes', 1), ('no', 2)]
+function getListOfResponseObjects(responses) {
+	var sortable = [];
+	for (var response in responses) {
+	    sortable.push([response, responses[response]]);
+	}
+
+	sortable.sort(function(a, b) {
+	    return a[1] - b[1];
+	});
+
+	return sortable
+}
+
+
 function populateSurveyItem(index) {
 		let relQuestionIndex = random_survey_indices[index]
 		let questionObj = survey_object[relQuestionIndex]
 
 		let question = questionObj['question']
 		let responses = questionObj['responses']
+		let listOfResponseObjects = getListOfResponseObjects(responses);
 		getByID('survey_question').innerHTML = question
 		for(let i = 0; i < responses.length; i++){
 			let radioKey = (i + 1);
@@ -580,10 +596,10 @@ function populateSurveyItem(index) {
 			let labelID = "radio-" + radioKey + "-label";
 
 			let input = getByID(radioID);
-			input.value = responses[i];
+			input.value = listOfResponseObjects[i][1];
 			input.checked = false;
 			let label = getByID(labelID);
-			label.innerHTML = responses[i];
+			label.innerHTML = listOfResponseObjects[i][0];
 			showInlineBlock("#" + radioID);
 			showInlineBlock("#" + labelID);
 		}
@@ -722,15 +738,28 @@ var survey_object = [
 {
 	'question-id': 1,
 	'question': "How many eggs would you like?",
-	'responses': ["One", "Two", "Three"]
+	'responses': {
+		"One": 1,
+		"Two": 2,
+		"Three": 3,
+	}	
 },
 
 {
 	'question-id': 2,
-	'question': "Are you likable?",
-	'responses': ["Yes", "No", "I don't know", "Maybe"]
-}
+	'question': "I go out of my way to treat everyone fairly",
+	'responses': {
+		"Strongly disagree": 1,
+		"Disagree": 2,
+		"Neither agree nor disagree": 3,
+		"Agree": 4,
+		"Strongly Agree": 5,
+	}
+},
+
+########## MORE QUESTIONS HERE ##########
 ]
+
 
 var random_survey_indices = randomSurveyOrder()
 var survey_item_index = 0
