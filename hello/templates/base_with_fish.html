@@ -234,11 +234,11 @@ Demographics Questions
 Please provide a response for each of the following questions. 
 <form id='demo-form'>
 		<input type="checkbox" id="weirddemo-1"  name="weirddemo-1" value="African American or Black">
-		<label id="weirddemo-1-label" for="weirddemo-1"> Value1 </label><br/>
+		<label id="weirddemo-1-label" for="weirddemo-1"> African American or Black </label><br/>
 		<input type="checkbox" id="weirddemo-2"  name="weirddemo-2" value="American Indian or Alaska Native">
-		<label id="weirddemo-2-label" for="weirddemo-2"> Value2 </label><br/>
+		<label id="weirddemo-2-label" for="weirddemo-2"> American Indian or Alaska Native </label><br/>
 		<input type="checkbox" id="weirddemo-3"  name="weirddemo-3" value="Asian">
-		<label id="weirddemo-3-label" for="weirddemo-3"> Value3 </label><br/>
+		<label id="weirddemo-3-label" for="weirddemo-3"> Asian </label><br/>
 		<input type="checkbox" id="weirddemo-4"  name="weirddemo-4" value="Native Hawaiian or Pacific Islander">
 		<label id="weirddemo-4-label" for="weirddemo-4"> Native Hawaiian or Pacific Islander </label><br/>
 		<input type="checkbox" id="weirddemo-5"  name="weirddemo-5" value="White">
@@ -576,9 +576,7 @@ function administerSurvey() {
 	// Include check to see if demographics is complete
 	// populate resultsJSON with results
 	hide("#weird-demographics")
-	let relQuestionIndex = random_survey_indices[survey_item_index]
-	let initialQuestionObj = survey_object[relQuestionIndex]
-	populateSurveyItem(initialQuestionObj)
+	populateSurveyItem()
 	show("#survey_item")
 }
 
@@ -631,7 +629,8 @@ function getListOfResponseObjects(responses) {
 }
 
 
-function populateSurveyItem(questionObj) {
+function populateSurveyItem() {
+		let questionObj = getNextQuestion();
 		let question = questionObj['question']
 		let responses = questionObj['responses']
 		let listOfResponseObjects = getListOfResponseObjects(responses);
@@ -703,9 +702,13 @@ function iterate_survey_item() {
 		return;
 	}
 
-	populateSurveyItem(survey_item_index);
+	populateSurveyItem();
 }
 
+function getNextQuestion() {
+	let relQuestionIndex = random_survey_indices[survey_item_index]
+	return survey_object[relQuestionIndex]
+}
 // Uploads results to server where they are appended to text file
 function uploadResults() {
 			// Upload results
