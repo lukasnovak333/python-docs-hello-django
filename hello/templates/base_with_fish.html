@@ -223,7 +223,7 @@ Are you ready to take our survey?
 <pre id="finish_survey" style="display: none;">
 Thank you for participating in the study. There is just one last part that we need to do. It is called debriefing. 
 We just need to ask you a few questions about our study. If you don’t have an answer, it’s fine to say, ‘I don’t know.’
-<input type="button" id="go-to-debrief" onclick="goToDebrief()" value="Proceed to Debriefing"/>
+<input type="button" id="go-to-debrief" onclick="goToDebrief()" value="Proceed to Questionnaire"/>
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
 
@@ -521,7 +521,7 @@ function goToFinalDebriefForm() {
 
 	hide("#debrief-funnel");
 	show("#debrief-form");
-	
+
 	let answerOne = getByID("purposeBox").value;
 	let answerTwo = getByID("purposeBox-2").value;
 	let answerThree = getByID("purposeBox-3").value;
