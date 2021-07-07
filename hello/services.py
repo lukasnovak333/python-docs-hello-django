@@ -29,7 +29,7 @@ def single_service(request):
 
 		resultsObj = {}
 
-		for key in ['cond', 'id', 'R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'total', 'surveyResults']:
+		for key in ['cond', 'id', 'R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'total', 'surveyResults', 'debriefFunnel']:
 			if key not in content:
 				return JsonResponse({'error': 'true', 'message': 'no' + key})
 			else:
