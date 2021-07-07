@@ -390,7 +390,7 @@ var bot_turn_base_time = 2000;
 var bot_turn_offset_rand = 500;
 var bot_turn_offset_base = 500;
 
-var NUM_ROUNDS = 2;
+var NUM_ROUNDS = 7;
 var NUM_RADIO_ITEMS = 8;
 var NUM_DEMO_ITEMS = 9;
 
@@ -405,7 +405,14 @@ $(document).keydown(function(event) {
 		else { hide("#outputBox") }
 	} 
 	// on Enter 
-	if(event.which == 13) { if(!isHidden("#game")) { turn_advance() }	}
+	if(event.which == 13) { 
+		if(!isHidden("#game")) { turn_advance() }
+		else {
+			if(!isHidden('#survey_item')) {
+				iterate_survey_item();
+			}
+		}
+	}
 });
 
 
