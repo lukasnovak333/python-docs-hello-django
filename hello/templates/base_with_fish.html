@@ -377,7 +377,7 @@ var bot_turn_base_time = 2000;
 var bot_turn_offset_rand = 500;
 var bot_turn_offset_base = 500;
 
-var NUM_ROUNDS = 7;
+var NUM_ROUNDS = 2;
 var NUM_RADIO_ITEMS = 8;
 
 var elements = ["#outputBox", "#connect", "#instructions", "#game", "#finish", "#consent_form", "#failure_case", "#survey_item"]
@@ -608,7 +608,7 @@ function populateSurveyItem(index) {
 		let listOfResponseObjects = getListOfResponseObjects(responses);
 
 		getByID('survey_question').innerHTML = question
-		
+
 		for(let i = 0; i < listOfResponseObjects.length; i++){
 			let radioKey = (i + 1);
 			let radioID = "radio-" + radioKey;
