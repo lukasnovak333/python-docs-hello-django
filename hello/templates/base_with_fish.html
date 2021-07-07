@@ -135,6 +135,14 @@ Thank you for looking at the consent form. Have a nice day!
 		<label id="radio-3-label" for="radio-3"> Value3 </label><br/>
 		<input type="radio" id="radio-4"  name="radio-4" value="Value4">
 		<label id="radio-4-label" for="radio-4"> Value4 </label><br/>
+		<input type="radio" id="radio-5"  name="radio-5" value="Value5">
+		<label id="radio-5-label" for="radio-5"> Value5 </label><br/>
+		<input type="radio" id="radio-6"  name="radio-6" value="Value6">
+		<label id="radio-6-label" for="radio-6"> Value6 </label><br/>
+		<input type="radio" id="radio-7"  name="radio-7" value="Value7">
+		<label id="radio-7-label" for="radio-7"> Value7 </label><br/>
+		<input type="radio" id="radio-8"  name="radio-8" value="Value8">
+		<label id="radio-8-label" for="radio-8"> Value8 </label><br/>
 	</form>
 	<input type="button" id="survey-iterator" onclick="iterate_survey_item()" value="Next">
 </pre>
@@ -360,6 +368,7 @@ var bot_turn_offset_rand = 500;
 var bot_turn_offset_base = 500;
 
 var NUM_ROUNDS = 7;
+var NUM_RADIO_ITEMS = 8;
 
 var elements = ["#outputBox", "#connect", "#instructions", "#game", "#finish", "#consent_form", "#failure_case", "#survey_item"]
 
@@ -579,8 +588,8 @@ function populateSurveyItem(index) {
 			showInlineBlock("#" + labelID);
 		}
 
-		if(responses.length < 4) {
-			for(let i = 4; i > responses.length; i--) {
+		if(responses.length < NUM_RADIO_ITEMS) {
+			for(let i = NUM_RADIO_ITEMS; i > responses.length; i--) {
 				let radioID = "radio-" + i;
 				let labelID = "radio-" + i + "-label";
 				getByID(radioID).checked = false;
@@ -595,7 +604,7 @@ function iterate_survey_item() {
 	let checked = false;
 	let value = NaN;
 
-	for(let i = 1; i <= 4; i++) {
+	for(let i = 1; i <= NUM_RADIO_ITEMS; i++) {
 		let radioID = "radio-" + i;
 		let input = getByID(radioID);
 		if(input.checked) {
