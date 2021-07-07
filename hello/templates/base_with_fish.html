@@ -465,22 +465,28 @@ function administer_surveys() {
 }
 
 function goToDebrief() {
-	hide("#finish_survey")
-	show("#debrief-funnel")
+	hide("#finish_survey");
+	show("#debrief-funnel");
 }
 
 function goToFinalDebriefForm() {
-	hide("#debrief-funnel")
-	let answerOne = getByID("purposeBox").innerHTML
-	let answerTwo = getByID("purposeBox-2").innerHTML
-	let answerThree = getByID("purposeBox-3").innerHTML
-	let resultsJSON['debriefFunnel'] = {
-		'answerOne': answerOne,
+
+	hide("#debrief-funnel");
+
+	let answerOne = getByID("purposeBox").innerHTML;
+	let answerTwo = getByID("purposeBox-2").innerHTML;
+	let answerThree = getByID("purposeBox-3").innerHTML;
+
+	let answerObj = { 'answerOne': answerOne,
 		'answerTwo': answerTwo,
-		'answerThree': answerThree
-	}
-	show("#debrief-form")
-	uploadResults()
+		'answerThree': answerThree,
+	};
+
+	let resultsJSON['debriefFunnel'] = answerObj;
+
+	show("#debrief-form");
+
+	uploadResults();
 }
 
 function populateSurveyItem(index) {
