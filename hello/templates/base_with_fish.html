@@ -112,7 +112,7 @@ and agree to participate in this study.
 <!-- Failure Case-------------------------------------------------------------------------------------------->
 <pre id="failure_case" style="display:none;">
 <strong>Thank You</strong>
-This is what you do now. 
+Thank you for looking at the consent form. Have a nice day! 
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
 <!-- Connection Screen ------------------------------------------------------------------------------------------------>
@@ -229,13 +229,21 @@ We just need to ask you a few questions about our study. If you don’t have an 
 
 <!--Debriefing ----------------------------------------------------------------------------------------------------->
 <pre id="debrief-funnel" style="display: none;">
-What do you think the purpose of the study was? (200 words or less)
-<textarea id="purposeBox" rows="10" cols="25" style=""> </textarea>
-If our avowed purpose was not the real purpose, what do you think the purpose is? 
-<textarea id="purposeBox-2" rows="10" cols="25" style=""> </textarea>
-Was there anything about the study that seemed suspicious? 
-<textarea id="purposeBox-3" rows="10" cols="25" style=""> </textarea>
-<input type="button" id="go-to-debrief" onclick="goToFinalDebriefForm()" value="Proceed to Debriefing"/>
+	<div id="funnel-1" style="display:none;">
+		What do you think the purpose of the study was? (200 words or less)
+		<textarea id="purposeBox" rows="10" cols="25" style=""> </textarea>
+		<input type="button" id="go-to-funnel-2" onclick="goToFunnel2()" value="Next"/>
+	</div>
+	<div id="funnel-2" style="display:none;">
+		If our avowed purpose was not the real purpose, what do you think the purpose is? 
+		<textarea id="purposeBox-2" rows="10" cols="25" style=""> </textarea>
+		<input type="button" id="go-to-funnel-3" onclick="goToFunnel3()" value="Next"/>
+	</div>
+	<div id="funnel-3" style="display:none;">
+		Was there anything about the study that seemed suspicious? 
+		<textarea id="purposeBox-3" rows="10" cols="25" style=""> </textarea>
+		<input type="button" id="go-to-debrief" onclick="goToFinalDebriefForm()" value="Proceed to Debriefing"/>
+	</div>
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
 
@@ -305,6 +313,9 @@ University of Miami Human Subjects Research Office at (305) 243-3195 or emailing
 
 ***Please keep a copy of this form or print this from your screen, for your future reference. Once again, 
 thank you for your participation in this study.***
+<a href="http://www.google.com/">
+   <input type="button" value="Complete Participation in Study" />
+</a>
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
 
@@ -404,7 +415,7 @@ function initiate_experiment(){
 
 	// Get subid
 	while(isNaN(condition)) {
-		var subject_id = window.prompt("Enter a Valid Participant ID");
+		var subject_id = window.prompt("Enter a Valid Prolific ID");
 		condition = (subject_id % 3);
 	}
 
@@ -515,6 +526,17 @@ function administer_surveys() {
 function goToDebrief() {
 	hide("#finish_survey");
 	show("#debrief-funnel");
+	show("#funnel-1")
+}
+
+function goToFunnel2() {
+	hide("#funnel-1")
+	show("#funnel-2")
+}
+
+function goToFunnel3() {
+	hide("#funnel-2")
+	show("#funnel-3")
 }
 
 function goToFinalDebriefForm() {
@@ -687,8 +709,17 @@ function randomSurveyOrder() {
 }
 
 var survey_object = [
-{'question': "How many eggs would you like?", 'responses': ["One", "Two", "Three"]},
-{'question': "Are you likable?", 'responses': ["Yes", "No", "I don't know", "Maybe"]}
+{
+	'question-id': 1,
+	'question': "How many eggs would you like?",
+	'responses': ["One", "Two", "Three"]
+},
+
+{
+	'question-id': 2,
+	'question': "Are you likable?",
+	'responses': ["Yes", "No", "I don't know", "Maybe"]
+}
 ]
 
 var random_survey_indices = randomSurveyOrder()
