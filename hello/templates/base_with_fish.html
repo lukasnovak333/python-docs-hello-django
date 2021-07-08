@@ -453,11 +453,11 @@ function initiate_experiment(){
 	// Hide Consent Form
 	hide("#consent_form");
 
-	let idCheck = NaN
+	let idNotValid = true
 	// Get subid
-	while(isNaN(idCheck)) {
+	while(idNotValid) {
 		var subject_id = window.prompt("Enter a Valid Prolific ID");
-		idCheck = (subject_id % 3);
+		if(subject_id.length == 24) idNotValid = false; 
 	}
 
 	output = getByID("outputBox")
