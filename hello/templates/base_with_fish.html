@@ -21,7 +21,7 @@
 		}
 
 		input:hover {
-			background: grey;
+			background: lightgrey;
 		}
 	
 
@@ -662,7 +662,7 @@ function getListOfResponseObjects(responses) {
 
 
 function populateSurveyItem() {
-		let questionObj = getNextQuestion();
+		let questionObj = getCurrentQuestion();
 		let question = questionObj['question']
 		let responses = questionObj['responses']
 		let listOfResponseObjects = getListOfResponseObjects(responses);
@@ -719,8 +719,11 @@ function iterate_survey_item() {
 	}
 
 	// Proceed
+	let question = getCurrentQuestion()
+
 	resultsJSON['surveyResults'].push({
 		'item': survey_item_index,
+		'questionID': question['question-id'],
 		'question': getByID('survey_question').innerHTML,
 		'responseCode': value,
 		'responseText': label,
@@ -737,7 +740,7 @@ function iterate_survey_item() {
 	populateSurveyItem();
 }
 
-function getNextQuestion() {
+function getCurrentQuestion() {
 	let relQuestionIndex = random_survey_indices[survey_item_index]
 	return survey_object[relQuestionIndex]
 }
