@@ -667,7 +667,7 @@ function populateSurveyItem() {
 		let responses = questionObj['responses']
 		let listOfResponseObjects = getListOfResponseObjects(responses);
 
-		getByID('survey_question').innerHTML = question
+		getByID('survey_question').innerHTML = "" + (survey_item_index + 1) + ": " + question
 
 		for(let i = 0; i < listOfResponseObjects.length; i++){
 			let radioKey = (i + 1);
@@ -2123,6 +2123,33 @@ var survey_object = [
 {
 'question-id': "socdesirable-16",
 'question': "I don’t gossip about other people’s business",
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
+},
+
+{
+'question-id': "attcheck-1",
+'question': "Please select 'Rarely true' for this question",
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
+},
+{
+'question-id': "attcheck-2",
+'question': "Please select 'Not true' for this question",
 'responses': {
 "Not true": 1,
 "Rarely true": 2,
