@@ -103,7 +103,7 @@ research participant, you may contact The Human Subjects Research Office at 305-
 
 PARTICIPANT AGREEMENT:
 
-By clicking on the “I Agree” button below, I acknowledge that I have read the information in this consent form
+By clicking on the "I Agree" button below, I acknowledge that I have read the information in this consent form
 and agree to participate in this study.
 <input id="consent_affirmative" type="button" onclick="initiate_experiment()" value="I agree">
 <input id="consent_negative" type="button" onclick="fail_experiment()" value="I do not agree">
@@ -172,9 +172,9 @@ The fish are so valuable that selling 450 fish will earn you enough money for yo
 
 But if you take more fish, you will make more money. 
 
-You will see how your total adds up over the “years” (turns) you will play the game. 
+You will see how your total adds up over the "years" (turns) you will play the game. 
 
-You will play up to 15 “years”. You will see how much other players take per year after you choose how many you will take. 
+You will play up to 15 "years". You will see how much other players take per year after you choose how many you will take. 
 
 At the end of the experiment, all of the people who have played this game 
 will be entered into a lottery for an Amazon gift card worth $100. One out of ten players will win a gift card.
@@ -920,18 +920,21 @@ var survey_object = [
 		"No": 0,
 	}
 },
+
 {
-	'question-id': 1,
-	'question': "How many eggs would you like?",
+	'question-id': "IPFS-1",
+	'question': "When interacting with other people, fairness is usually more important than getting something for myself",
 	'responses': {
-		"One": 1,
-		"Two": 2,
-		"Three": 3,
+		"Strongly disagree": 1,
+		"Disagree": 2,
+		"Neither agree nor disagree": 3,
+		"Agree": 4,
+		"Strongly Agree": 5,
 	}	
 },
 
 {
-	'question-id': 2,
+	'question-id': "IPFS-2",
 	'question': "I go out of my way to treat everyone fairly",
 	'responses': {
 		"Strongly disagree": 1,
@@ -940,6 +943,1200 @@ var survey_object = [
 		"Agree": 4,
 		"Strongly Agree": 5,
 	}
+},
+
+{
+'question-id': "IPFS-3",
+'question': "I treat others fairly, even if there was a situation in the past when they treated me unfairly",
+'responses': {
+"Strongly disagree": 1,
+"Disagree": 2,
+"Neither agree nor disagree": 3,
+"Agree": 4,
+"Strongly Agree": 5,
+}
+},
+
+{
+'question-id': "IPFS-4",
+'question': "Whenever I treat others unfairly, I apologize for my wrongdoing",
+'responses': {
+"Strongly disagree": 1,
+"Disagree": 2,
+"Neither agree nor disagree": 3,
+"Agree": 4,
+"Strongly Agree": 5,
+}
+},
+
+{
+'question-id': "IPFS-5",
+'question': "I treat other people fairly whether I like them or not",
+'responses': {
+"Strongly disagree": 1,
+"Disagree": 2,
+"Neither agree nor disagree": 3,
+"Agree": 4,
+"Strongly Agree": 5,
+}
+},
+
+{
+'question-id': "IPFS-6",
+'question': "I’m willing to go out of my way to be fair in the situation even when it inconveniences me",
+'responses': {
+"Strongly disagree": 1,
+"Disagree": 2,
+"Neither agree nor disagree": 3,
+"Agree": 4,
+"Strongly Agree": 5,
+}
+},
+{
+'question-id': "justice-sensitivity-1",
+'question': "It bothers me when others receive something that ought to be mine",
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-2",
+'question': "It makes me angry when others receive a reward that I have earned", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-3",
+'question': "I cannot easily bear it when others profit unilaterally from me", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-4",
+'question': "It takes me a long time to forget when I have to fix others’ carelessness", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-5",
+'question': "It gets me down when I get fewer opportunities than others to develop my skills", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-6",
+'question': "It makes me angry when others are undeservingly better off than me", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-7",
+'question': "It worries me when I have to work hard for things that come easily to others",
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-8",
+'question': "I ruminate for a long time when other people are treated better than me", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-9",
+'question': "It burdens me to be criticized for things that are overlooked with others", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-10",
+'question': "It makes me angry when I am treated worse than others", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-11",
+'question': "It bothers me when someone gets something they don’t deserve", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-12",
+'question': "I am upset when someone does not get a reward he/she has earned", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-13",
+'question': "I cannot easily bear it when someone unilaterally profits from others", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-14",
+'question': "It takes me a long time to forget when someone else has to fix others’ carelessness", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-15",
+'question': "It disturbs me when someone receives fewer opportunities to develop his/her skills than others", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-16",
+'question': "I am upset when someone is undeservingly worse off than others", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-17",
+'question': "It worries me when someone has to work hard for things that come easily to others", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-18",
+'question': "I ruminate for a long time when someone is treated nicer than others for no reason", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-19",
+'question': "It gets me down to see someone criticized for things that are overlooked with others", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-20",
+'question': "I am upset when someone is treated worse than others", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-21",
+'question': "It disturbs me when I receive what others ought to have", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-22",
+'question': "I have a bad conscience when I receive a reward that someone else has earned", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-23",
+'question': "I cannot easily bear it to unilaterally profit from others", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-24",
+'question': "It takes me a long time to forget when others have to fix my carelessness", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-25",
+'question': "It disturbs me when I receive more opportunities than others to develop my skills", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-26",
+'question': "I feel guilty when I am better off than others for no reason", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-27",
+'question': "It bothers me when things come easily to me that others have to work hard for", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-28",
+'question': "I ruminate for a long time about being treated nicer than others for no reason", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-29",
+'question': "It bothers me when someone tolerates things with me that other people are being criticized for", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+}	
+},
+
+{
+'question-id': "justice-sensitivity-30",
+'question': "I feel guilty when I receive better treatment than others", 
+'responses': {
+"Not at all": 0,
+"A little": 1,
+"Somewhat": 2,
+"Agree": 3,
+"Strongly Agree": 4,
+"Exactly": 5,
+
+}	
+},
+
+
+
+
+Big Five Inventory
+
+{
+'question-id': "bigfive-1",
+'question': "I see myself as someone who is talkative", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-2",
+'question': "I see myself as someone who tends to find fault with others", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-3",
+'question': "I see myself as someone who does a thorough job", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-4",
+'question': "I see myself as someone who is depressed, blue", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-5",
+'question': "I see myself as someone who is original, comes up with new ideas", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-6",
+'question': "I see myself as someone who is reserved", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-7",
+'question': "I see myself as someone who is helpful and unselfish with others", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-8",
+'question': "I see myself as someone who can be somewhat careless", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-9",
+'question': "I see myself as someone who is relaxed, handles stress well", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-10",
+'question': "I see myself as someone who is curious about many different things", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-11",
+'question': "I see myself as someone who is full of energy", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-12",
+'question': "I see myself as someone who starts quarrels with others", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-13",
+'question': "I see myself as someone who is a reliable worker", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-14",
+'question': "I see myself as someone who can be tense", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-15",
+'question': "I see myself as someone who is ingenious, a deep thinker", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-16",
+'question': "I see myself as someone who generates a lot of enthusiasm", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-17",
+'question': "I see myself as someone who has a forgiving nature", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-18",
+'question': "I see myself as someone who tends to be disorganized", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-19",
+'question': "I see myself as someone who worries a lot", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-20",
+'question': "I see myself as someone who has an active imagination", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-21",
+'question': "I see myself as someone who tends to be quiet", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-22",
+'question': "I see myself as someone who is generally trusting", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-23",
+'question': "I see myself as someone who tends to be lazy", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-24",
+'question': "I see myself as someone who is emotionally stable, not easily upset", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-25",
+'question': "I see myself as someone who is inventive", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-26",
+'question': "I see myself as someone who has an assertive personality", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-27",
+'question': "I see myself as someone who can be cold and aloof", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-28",
+'question': "I see myself as someone who perseveres until the task is finished", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-29",
+'question': "I see myself as someone who can be moody", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-30",
+'question': "I see myself as someone who values artistic, aesthetic experiences", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-31",
+'question': "I see myself as someone who is sometimes shy, inhibited", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-32",
+'question': "I see myself as someone who is considerate and kind to almost everyone", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-33",
+'question': "I see myself as someone who does things efficiently", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-34",
+'question': "I see myself as someone who remains calm in tense situations", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-35",
+'question': "I see myself as someone who prefers work that is routine", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-36",
+'question': "I see myself as someone who is outgoing, sociable", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-37",
+'question': "I see myself as someone who is sometimes rude to others", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-38",
+'question': "I see myself as someone who makes plans and follows through with them", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-39",
+'question': "I see myself as someone who gets nervous easily", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-40",
+'question': "I see myself as someone who likes to reflect, play with ideas", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-41",
+'question': "I see myself as someone who has few artistic interests", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-42",
+'question': "I see myself as someone who likes to cooperate with others", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-43",
+'question': "I see myself as someone who is easily distracted", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+
+{
+'question-id': "bigfive-44",
+'question': "I see myself as someone who is sophisticated in art, music, or literature", 
+'responses': {
+"Disagree strongly": 1,
+"Disagree a little": 2,
+"Neither agree nor disagree": 3,
+"Agree a little": 4,
+"Agree strongly": 5,
+}
+},
+{
+'question-id': "socdesirable-1",
+'question': "I have not always been honest with myself", 
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
+},
+
+{
+'question-id': "socdesirable-2",
+'question': "I always know why I like things", 
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
+},
+
+{
+'question-id': "socdesirable-3",
+'question': "It’s hard for me to shut off a disturbing thought", 
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
+},
+
+{
+'question-id': "socdesirable-4",
+'question': "I never regret my decisions", 
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
+},
+
+{
+'question-id': "socdesirable-5",
+'question': "I sometimes lose out on things because I can’t make up my mind soon enough", 
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
+},
+
+{
+'question-id': "socdesirable-6",
+'question': "I am a completely rational person", 
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
+},
+
+{
+'question-id': "socdesirable-7",
+'question': "I am very confident of my judgements", 
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
+},
+
+{
+'question-id': "socdesirable-8",
+'question': "I have sometimes doubted my ability as a lover",
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
+},
+
+{
+'question-id': "socdesirable-9",
+'question': "I sometimes tell lies if I have to",
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
+},
+
+{
+'question-id': "socdesirable-10",
+'question': "I never cover up my mistakes",
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
+},
+
+{
+'question-id': "socdesirable-11",
+'question': "There have been occasions when I have taken advantage of someone",
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
+},
+
+{
+'question-id': "socdesirable-12",
+'question': "I sometimes try to get even rather than forgive and forget",
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
+},
+
+{
+'question-id': "socdesirable-13",
+'question': "I have said something bad about a friend behind his/her back",
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
+},
+
+{
+'question-id': "socdesirable-14",
+'question': "When I hear people talking privately, I avoid listening",
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
+},
+
+{
+'question-id': "socdesirable-15",
+'question': "I never take things that don’t belong to me",
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
+},
+
+{
+'question-id': "socdesirable-16",
+'question': "I don’t gossip about other people’s business",
+'responses': {
+"Not true": 1,
+"Rarely true": 2,
+"At times true": 3,
+"Somewhat": 4,
+"True": 5,
+"Often true": 6,
+"Very true": 7,
+}
 },
 ]
 
