@@ -79,8 +79,18 @@ CONSENT TO PARTICIPATE IN A RESEARCH STUDY: The following information describes 
 being asked to participate. Please read the information carefully. At the end, you will be asked to indicate your 
 agreement to participate. We are asking you to participate in a research study to learn more about how personality and decision-making are related.
 
-Participation in this study involves playing a decision-making game and completing several questionnaires about personal 
-traits, which will take approximately forty minutes.
+We are recruiting participants for a research study about personality and decision-making.
+The purpose of this research is to learn more about how personality traits and decision-making are related. 
+
+Participation in this study involves participating in a decision-making game and completing a series of 
+questionnaires, which will take approximately twenty minutes. You will complete these tasks online. 
+You will participate in a decision-making game and will be asked several questions about 
+various aspects of your personality.
+
+For completing this study, all participants will receive the amount previously specified by your 
+research panel provider. Participants in the study will also have approximately a 1 in 60 chance of winning a 
+$100 Amazon gift card. Because the game has four players, you may need to wait for the other players to 
+connect after proceeding to the game. Games start about every 5 minutes.
 
 We do not anticipate significant risks to you related to this study, but it is possible that some questions could be 
 distressing. Your participation in this study is voluntary and you are free to leave the study at any time. If you
@@ -194,7 +204,8 @@ Each fish you catch gives you 1 chance in the lottery.
 				Every year the number of fish increases by 10% of the total 
 				The lake cannot hold more than 20,000 fish 
 				By law, you can catch up to 1200 fish each year
-				You have to catch 450 each turn to feed and take care of your family.			
+				You have to catch 450 each turn to feed and take care of your family.
+				If each of you on average take more than 450 fish per turn, the lake will slowly be depleted of fish. 		
 				Your total at the end = total number of chances to win a $100 Amazon gift card 
 	</pre>
 
@@ -406,7 +417,7 @@ $(document).keydown(function(event) {
 	// } 
 	// on Enter 
 	if(event.which == 13) { 
-		if(!isHidden("#game")) { turn_advance() }
+		if(!isHidden("#game"))  { turn_advance() }
 		else {
 			if(!isHidden('#survey_item')) {
 				iterate_survey_item();
