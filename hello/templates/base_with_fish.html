@@ -399,11 +399,11 @@ var elements = ["#outputBox", "#connect", "#instructions", "#game", "#finish", "
 
 // Keypress Handlers  //
 $(document).keydown(function(event) { 
-	// on Backslash
-	if(event.which == 220) {
-		if(isHidden("#outputBox")) { show("#outputBox") }
-		else { hide("#outputBox") }
-	} 
+	// // on Backslash
+	// if(event.which == 220) {
+	// 	if(isHidden("#outputBox")) { show("#outputBox") }
+	// 	else { hide("#outputBox") }
+	// } 
 	// on Enter 
 	if(event.which == 13) { 
 		if(!isHidden("#game")) { turn_advance() }
