@@ -127,6 +127,7 @@ Thank you for looking at the consent form. Have a nice day!
 <!--------------------------------------------------------------------------------------------------------------------->
 <!-- Connection Screen ------------------------------------------------------------------------------------------------>
 <pre id=connect style="display:none;">
+	<strong> Please wait for everyone to connect... </strong>
 	<p id="p1_connect"> Player 1 - Not Connected </p>
 	<p id="p2_connect"> Player 2 - Connected </p>
 	<p id="p3_connect"> Player 3 - Not Connected </p>
@@ -354,8 +355,10 @@ University of Miami Human Subjects Research Office at (305) 243-3195 or emailing
 
 ***Please keep a copy of this form or print this from your screen, for your future reference. Once again, 
 thank you for your participation in this study.***
-<a href="https://app.prolific.co/submissions/complete?cc=4E152F17">
-   <input type="button" value="Complete Participation in Study" />
+<input type="button" value="Complete Participation in Study" onclick="submitDataAndRedirect()"/>
+<a id="redirect-link" href="https://app.prolific.co/submissions/complete?cc=4E152F17">
+<input type="button" value="Withdraw my Data, and Do Not Complete Study" onclick="fail_experiment()"/>
+   
 </a>
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
@@ -403,6 +406,8 @@ var bot_turn_offset_base = 700;
 var NUM_ROUNDS = 7;
 var NUM_RADIO_ITEMS = 8;
 var NUM_DEMO_ITEMS = 9;
+
+var oneMoreTryIndex = 0;
 
 var elements = ["#outputBox", "#connect", "#instructions", "#game", "#finish", "#consent_form", "#failure_case", "#survey_item"]
 
@@ -609,8 +614,14 @@ function administerSurvey() {
 
 		if(races.length > 0) completed = true
 		else {
-			window.prompt("Please answer the question.")
-			return;
+			if(oneMoreTryIndex == 0) {
+				window.prompt("Please consider answering the question.");
+				oneMoreTryIndex = 1;
+				return;
+			}
+			else {
+				oneMoreTryIndex = 0;
+			}
 		}
 	}
 
@@ -653,7 +664,6 @@ function goToFinalDebriefForm() {
 	};
 
 	resultsJSON['debriefFunnel'] = answerObj;
-	uploadResults();
 }
 
 // Returns like: [('yes', 1), ('no', 2)]
@@ -724,8 +734,14 @@ function iterate_survey_item() {
 	}
 
 	if(checked == false) {
-		alert("Please answer the question before clicking next.");
-		return;
+		if(oneMoreTryIndex == 0) {
+			alert("Please answer the question before clicking next.");
+			oneMoreTryIndex = 1;
+			return;
+		}
+		else {
+			oneMoreTryIndex = 0;
+		}
 	}
 
 	// Proceed
@@ -754,6 +770,13 @@ function getCurrentQuestion() {
 	let relQuestionIndex = random_survey_indices[survey_item_index]
 	return survey_object[relQuestionIndex]
 }
+
+function submitDataAndRedirect() {
+	uploadResults();
+	let link = getByID("redirect-link");
+	link.click();
+}
+
 // Uploads results to server where they are appended to text file
 function uploadResults() {
 			// Upload results
