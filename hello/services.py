@@ -47,4 +47,14 @@ def single_service(request):
 	except Exception as e:
 		return JsonResponse({'error': 'true', 'message': e})
 
-	
+@csrf_exempt
+def access_service(request):
+	try: 
+		f=open("/home/site/textFiles/accessLog.txt","a+")
+		f.write('---------------\n')
+		f.write(time.ctime(time.time()) + '\n')
+		f.write('\n----------------')
+		f.close()
+		return JsonResponse({'success': "true"})
+	except Exception as e:
+		return JsonResponse({'error': 'true', 'message': e})
