@@ -127,7 +127,7 @@ Thank you for looking at the consent form. Have a nice day!
 <!--------------------------------------------------------------------------------------------------------------------->
 <!-- Connection Screen ------------------------------------------------------------------------------------------------>
 <pre id=connect style="display:none;">
-	<strong> Please wait for everyone to connect... </strong>
+	<strong> Please wait for everyone to connect. You will not have to wait for more than 5 minutes. </strong>
 	<p id="p1_connect"> Player 1 - Not Connected </p>
 	<p id="p2_connect"> Player 2 - Connected </p>
 	<p id="p3_connect"> Player 3 - Not Connected </p>
@@ -291,6 +291,8 @@ We just need to ask you a few questions about our study. If you don’t have an 
 
 <!--Debriefing ----------------------------------------------------------------------------------------------------->
 <pre id="debrief-form" style="display: none;">
+
+<a id="redirect-link" href="https://app.prolific.co/submissions/complete?cc=4E152F17" style="display:none;">
 Debriefing Information
 
 Title of Research Study: Situational-Factor Person Interaction in Trait Fairness
@@ -355,9 +357,7 @@ University of Miami Human Subjects Research Office at (305) 243-3195 or emailing
 ***Please keep a copy of this form or print this from your screen, for your future reference. Once again, 
 thank you for your participation in this study.***
 <input type="button" value="Complete Participation in Study" onclick="submitDataAndRedirect()"/>
-<a id="redirect-link" href="https://app.prolific.co/submissions/complete?cc=4E152F17">
 <input type="button" value="Withdraw my Data, and Do Not Complete Study" onclick="fail_experiment()"/>
-   
 </a>
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
@@ -486,6 +486,7 @@ function initiate_experiment(){
 // If not offering consent 
 function fail_experiment() {
 	hide("#consent_form");
+	hide("#debrief-form")
 	show("#failure_case");
 }
 
@@ -583,7 +584,7 @@ function administerDemographics() {
 	let ageCheck = NaN
 	// Get subid
 	while(isNaN(ageCheck)) {
-		var age = window.prompt("Enter your age");
+		var age = window.prompt("Enter your age, or 0 if you would prefer not to answer.");
 		ageCheck = (age % 3);
 	}
 
@@ -614,7 +615,7 @@ function administerSurvey() {
 		if(races.length > 0) completed = true
 		else {
 			if(oneMoreTryIndex == 0) {
-				window.prompt("Please consider answering the question.");
+				window.p("Please consider answering the question before clicking 'Next'. If you are sure you do not want to answer, click 'Next' again to move to the next question.");
 				oneMoreTryIndex = 1;
 				return;
 			}
@@ -735,7 +736,7 @@ function iterate_survey_item() {
 
 	if(checked == false) {
 		if(oneMoreTryIndex == 0) {
-			alert("Please answer the question before clicking next.");
+			alert("Please consider answering the question before clicking 'Next'. If you are sure you do not want to answer, click 'Next' again to move to the next question.");
 			oneMoreTryIndex = 1;
 			return;
 		}
