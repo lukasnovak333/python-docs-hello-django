@@ -364,6 +364,12 @@ thank you for your participation in this study.***
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
 
+<!--Wait screen ----------------------------------------------------------------------------------------------------->
+<pre id="wait-screen" style="display: none;">
+	Please wait...
+</pre>
+<!--------------------------------------------------------------------------------------------------------------------->
+
 {% block scripts %}
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>
 <script type="text/javascript">
@@ -776,6 +782,8 @@ function getCurrentQuestion() {
 
 // Uploads results to server where they are appended to text file
 function uploadResults() {
+		hide("#debrief-form");
+		show("#wait-screen");
 			// Upload results
 		fetch('/services/postTestResult', {
 			method: 'POST',
