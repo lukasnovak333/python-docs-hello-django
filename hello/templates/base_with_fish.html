@@ -615,7 +615,7 @@ function administerSurvey() {
 		if(races.length > 0) completed = true
 		else {
 			if(oneMoreTryIndex == 0) {
-				window.p("Please consider answering the question before clicking 'Next'. If you are sure you do not want to answer, click 'Next' again to move to the next question.");
+				window.alert("Please consider answering the question before clicking 'Next'. If you are sure you do not want to answer, click 'Next' again to move to the next question.");
 				oneMoreTryIndex = 1;
 				return;
 			}
@@ -736,7 +736,7 @@ function iterate_survey_item() {
 
 	if(checked == false) {
 		if(oneMoreTryIndex == 0) {
-			alert("Please consider answering the question before clicking 'Next'. If you are sure you do not want to answer, click 'Next' again to move to the next question.");
+			window.alert("Please consider answering the question before clicking 'Next'. If you are sure you do not want to answer, click 'Next' again to move to the next question.");
 			oneMoreTryIndex = 1;
 			return;
 		}
