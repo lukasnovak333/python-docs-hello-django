@@ -25,10 +25,18 @@
 		}
 	
 
-		p, pre {
+		p {
 			font-weight: 500;
 			font-size: 120%;
 			font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+		}
+
+		pre {
+			font-weight: 500;
+			font-size: 120%;
+			font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+			border: solid black;
+			padding: 20px;
 		}
 
 		p.scorebox{
@@ -209,7 +217,7 @@ More fish means a higher chance of winning the gift card.
 				Your total at the end = total number of chances to win a $100 Amazon gift card 
 	</pre>
 
-	<div id="game_board"> 
+	<pre id="game_board"> 
 		<p id = "round_text"> Round 1 </p>
 		<p id= "pot_text"> Total Fish = 20000 </p>
 		<p id= "p1"> Player 1 Took - </p>
@@ -224,7 +232,7 @@ More fish means a higher chance of winning the gift card.
 			<input type="button" onclick="turnAdvance()" id="game_button" value="Take">
 
 		<p class="scorebox"> <p id="player_text" class="scorebox_interior"> Player 4 (You) Total: 0 </p>  </p>
-	</div>
+	</pre>
 </div>
 <!--------------------------------------------------------------------------------------------------------------------->
 
