@@ -620,6 +620,7 @@ function administerSurvey() {
 			}
 			else {
 				oneMoreTryIndex = 0;
+				completed = true;
 			}
 		}
 	}
@@ -856,7 +857,7 @@ function randomSurveyOrder() {
 	// Mix [9, 10,....106]
 	let base = []
 	for(var i = NUM_DEMO_ITEMS; i < survey_object.length; i++) { base.push(i); }
-		
+
 	shuffle(base)
 
 	demoList.push.apply(demoList, base)
