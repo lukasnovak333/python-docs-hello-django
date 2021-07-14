@@ -221,7 +221,7 @@ More fish means a higher chance of winning the gift card.
 		<p id= "p4"> Player 4 (You) Took -  </p>
 
 			<input type="text" id="player_take">
-			<input type="button" onclick="turn_advance()" id="game_button" value="Take">
+			<input type="button" onclick="turnAdvance()" id="game_button" value="Take">
 
 		<p class="scorebox"> <p id="player_text" class="scorebox_interior"> Player 4 (You) Total: 0 </p>  </p>
 	</div>
@@ -420,10 +420,10 @@ $(document).keydown(function(event) {
 	// } 
 	// on Enter 
 	if(event.which == 13) { 
-		if(!isHidden("#game"))  { turn_advance() }
+		if(!isHidden("#game"))  { turnAdvance() }
 		else {
 			if(!isHidden('#survey-item')) {
-				iterate_survey-item();
+				iterateSurveyItem();
 			}
 		}
 	}
@@ -500,7 +500,7 @@ function startGame(){
 }
 
 // Attempts to advance turn
-function turn_advance(){
+function turnAdvance(){
 	if(p4_lock == 1 && (p1_lock * p2_lock * p3_lock == 0)){
 		alert("You Have Already Gone This Round! ");
 		getByID("player_take").value = "";
