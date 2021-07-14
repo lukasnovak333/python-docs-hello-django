@@ -62,7 +62,7 @@
 
 
 
-<body onload="show_consent_form()">
+<body onload="showConsentForm()">
 
 <!-- Hidden Data Storage Area ----------------------------------------------------------------------------------------->
 <textarea id="outputBox" rows="22" cols="15" style="display:none; position: absolute; height: 10%; width: 10%; left: 0; top: 0;" readonly> </textarea>
@@ -115,8 +115,8 @@ PARTICIPANT AGREEMENT:
 
 By clicking on the "I Agree" button below, I acknowledge that I have read the information in this consent form
 and agree to participate in this study.
-<input id="consent_affirmative" type="button" onclick="initiate_experiment()" value="I agree">
-<input id="consent_negative" type="button" onclick="fail_experiment()" value="I do not agree">
+<input id="consent_affirmative" type="button" onclick="initiateExperiment()" value="I agree">
+<input id="consent_negative" type="button" onclick="failExperiment()" value="I do not agree">
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
 <!-- Failure Case-------------------------------------------------------------------------------------------->
@@ -135,7 +135,7 @@ Thank you for looking at the consent form. Have a nice day!
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
 <!-- Generic Survey Item ---------------------------------------------------------------------------------------------->
-<pre id=survey_item style="display:none;">
+<pre id=survey-item style="display:none;">
 	<p id='survey_question'> </p>
 	<form id='survey_form'>
 		<input type="radio" id="radio-1"  name="radio-1" value="Value1">
@@ -155,7 +155,7 @@ Thank you for looking at the consent form. Have a nice day!
 		<input type="radio" id="radio-8"  name="radio-1" value="Value8">
 		<label id="radio-8-label" for="radio-8"> Value8 </label><br/>
 	</form>
-	<input type="button" id="survey-iterator" onclick="iterate_survey_item()" value="Next">
+	<input type="button" id="survey-iterator" onclick="iterateSurveyItem()" value="Next">
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
 
@@ -192,7 +192,7 @@ will be entered into a lottery for an Amazon gift card worth $100. One out of si
 However, the number of chances you have to win the gift card depends on how many fish you catch. 
 More fish means a higher chance of winning the gift card. 
 
-<input id="start_button" type="button" onclick="start_game()" value="Start Game!">
+<input id="start_button" type="button" onclick="startGame()" value="Start Game!">
 </pre>
 <!--------------------------------------------------------------------------------------------------------------------->
 
@@ -262,7 +262,7 @@ Please provide a response for each of the following questions.
 <!--------------------------------------------------------------------------------------------------------------------->
 
 <!--Pre-Debrief ----------------------------------------------------------------------------------------------------->
-<pre id="finish_survey" style="display: none;">
+<pre id="finish-survey" style="display: none;">
 Thank you for participating in the study. There is just one last part that we need to do. It is called debriefing. 
 We just need to ask you a few questions about our study. If you don’t have an answer, it’s fine to say, ‘I don’t know.’
 <input type="button" id="go-to-debrief" onclick="goToDebrief()" value="Proceed to Questions"/>
@@ -356,7 +356,7 @@ University of Miami Human Subjects Research Office at (305) 243-3195 or emailing
 ***Please keep a copy of this form or print this from your screen, for your future reference. Once again, 
 thank you for your participation in this study.***
 <input type="button" value="Complete Participation in Study" onclick="submitDataAndRedirect()"/>
-<input type="button" value="Withdraw my Data, and Do Not Complete Study" onclick="fail_experiment()"/>
+<input type="button" value="Withdraw my Data, and Do Not Complete Study" onclick="failExperiment()"/>
 
 <a id="redirect-link" href="https://app.prolific.co/submissions/complete?cc=4E152F17" style="display:none;"> </a>
 </pre>
@@ -408,7 +408,7 @@ var NUM_DEMO_ITEMS = 9;
 
 var oneMoreTryIndex = 0;
 
-var elements = ["#outputBox", "#connect", "#instructions", "#game", "#finish", "#consent_form", "#failure_case", "#survey_item"]
+var elements = ["#outputBox", "#connect", "#instructions", "#game", "#finish", "#consent_form", "#failure_case", "#survey-item"]
 
 
 // Keypress Handlers  //
@@ -422,8 +422,8 @@ $(document).keydown(function(event) {
 	if(event.which == 13) { 
 		if(!isHidden("#game"))  { turn_advance() }
 		else {
-			if(!isHidden('#survey_item')) {
-				iterate_survey_item();
+			if(!isHidden('#survey-item')) {
+				iterate_survey-item();
 			}
 		}
 	}
@@ -460,10 +460,10 @@ function shuffle(a){
 //
 
 // Occurs once body is loaded //
-function show_consent_form() { show("#consent_form"); }
+function showConsentForm() { show("#consent_form"); }
 
 // Begins experiment
-function initiate_experiment(){
+function initiateExperiment(){
 	// Hide Consent Form
 	hide("#consent_form");
 
@@ -484,14 +484,14 @@ function initiate_experiment(){
 }
 
 // If not offering consent 
-function fail_experiment() {
+function failExperiment() {
 	hide("#consent_form");
 	hide("#debrief-form")
 	show("#failure_case");
 }
 
 // Begins game
-function start_game(){
+function startGame(){
 	hide("#instructions")
 	show("#connect")
 	setTimeout(function(){ getByID("p1_connect").innerHTML = "Player 1 - Connected"}, p1_connect_time);
@@ -631,11 +631,11 @@ function administerSurvey() {
 	// populate resultsJSON with results
 	hide("#weird-demographics")
 	populateSurveyItem()
-	show("#survey_item")
+	show("#survey-item")
 }
 
 function goToDebrief() {
-	hide("#finish_survey");
+	hide("#finish-survey");
 	show("#debrief-funnel");
 	show("#funnel-1")
 }
@@ -715,7 +715,7 @@ function populateSurveyItem() {
 		}
 }
 
-function iterate_survey_item() {
+function iterateSurveyItem() {
 	// Check survey is filled out
 	let checked = false;
 	let value = NaN;
@@ -759,8 +759,8 @@ function iterate_survey_item() {
 	survey_item_index++;
 
 	if(survey_item_index == survey_object.length) {
-		hide("#survey_item");
-		show("#finish_survey");
+		hide("#survey-item");
+		show("#finish-survey");
 		return;
 	}
 
@@ -794,7 +794,7 @@ function uploadResults() {
 
 // These are all bot turns 
 function p1_turn() {
-	if(condition == 0) { p1_take = p1_moves[(round - 1)]; }
+	if(condition == 0) { p1_take = p1_moves[(round - 1)]s; }
 	if(condition == 1) { p1_take = p1_moves[(6 + (round - 1))]; }
 	if(condition == 2) { p1_take = p1_moves[(12 + (round - 1))]; }
 	pot_total -= p1_take;
