@@ -328,7 +328,6 @@ we were interested in fairness. We hope you understand the reason for our use of
 Your Right to Withdraw Data:
 
 Now that you know the true purpose of this research study, you may decide whether you want
-
 to allow the data about you to remain in the study. If you choose to have your data removed, you can have all 
 your data from the study removed. Please email the principal investigator, Blaine Fowers (bfowers@miami.edu), 
 and ask to have your data removed. Nothing bad will happen if you decide to have your data removed. Even if 
@@ -850,12 +849,18 @@ function refresh_p4() {
 }
 
 function randomSurveyOrder() {
+	// Create [0, 1, 2, 3, 4,...., 8]
+	let demoList = []
+	for(let i = 0; i < NUM_DEMO_ITEMS; i++)  { demoList.push(i); }
+
+	// Mix [9, 10,....106]
 	let base = []
-	for(var i = 0; i < survey_object.length; i++) {
-		base.push(i);
-	}
+	for(var i = NUM_DEMO_ITEMS; i < survey_object.length; i++) { base.push(i); }
+		
 	shuffle(base)
-	return base
+
+	demoList.push.apply(demoList, base)
+	return demoList
 }
 
 // PUT DEMO ITEMS FIRST
